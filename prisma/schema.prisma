@@ -1,0 +1,71 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// in database as  plain text: Admin, User, Guest
+enum Role {
+  Admin
+  User
+  Guest
+}
+
+model User {
+  id             Int       @id @default(autoincrement())
+  name           String?   @unique
+  email          String    @unique
+  emailVerified  DateTime?
+  image          String?
+  hashedPassword String?
+  createdAt      DateTime  @default(now())
+  updatedAt      DateTime  @updatedAt
+  role           Role      @default(Guest)
+
+  accounts Account[]
+  mynotes  Mynote[]
+}
+
+model Account {
+  id                Int     @id @default(autoincrement())
+  type              String
+  provider          String
+  providerAccountId String
+  token_type        String?
+  refresh_token     String?
+  access_token      String?
+  id_token          String?
+  scope             String?
+  session_state     String?
+  expires_at        Int?
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+
+  @@unique([provider, providerAccountId])
+}
+
+model Mynote {
+  id         Int      @id @default(autoincrement())
+  language   String
+  category   String
+  content    String
+  occurredAt DateTime @default(now())
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+  tags       Int[]
+
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+}
+
+model Tag {
+  id   Int    @id @default(autoincrement())
+  name String
+}
