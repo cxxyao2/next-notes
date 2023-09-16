@@ -7,6 +7,8 @@ const ScrollToTop = () => {
 	const [visible, setVisible] = useState(false)
 	const [mounted, setMounted] = useState(false)
 
+
+
 	const toggleVisible = () => {
 		const scrolled =
 			document.documentElement.scrollTop || document.body.scrollTop

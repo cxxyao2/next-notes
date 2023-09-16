@@ -26,7 +26,8 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='en'>
-			<body className={`${inter.className} bg-white text-black antialiased dark:bg-gray-950 dark:text-white `}>
+			<body
+				className={`${inter.className} bg-white text-black antialiased dark:bg-gray-950 dark:text-white `}>
 				<ClientOnly>
 					<ClientSessionProvider>
 						<ThemeProvider>
@@ -35,13 +36,9 @@ export default function RootLayout({
 								<div className='relative flex flex-col flex-1 overflow-x-hidden overflow-y-auto'>
 									<NavBar />
 									<main className='mb-auto p-4 lg:p-6'>
-										<section className="mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0">
-
+										<section className='mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0'>
 											{children}
-
 										</section>
-
-
 									</main>
 									<Footer />
 									<Spinner />

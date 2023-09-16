@@ -1,12 +1,14 @@
 'use client'
 
-import React from 'react'
+import React, { useState } from 'react'
 import axios from 'axios'
+import MDEditor from '@uiw/react-md-editor'
+import rehypeSanitize from 'rehype-sanitize'
 
 type Props = {}
 
 export default function CreateNote({}: Props) {
-	const [content, setContent] = React.useState('')
+	const [content, setContent] = useState<string | undefined>('Hello world')
 
 	const handleDelete = async (e: React.FormEvent) => {
 		e.preventDefault()
@@ -43,7 +45,6 @@ export default function CreateNote({}: Props) {
 		e.preventDefault()
 
 		try {
-			// Replace 'http://localhost:3000/api/createRecord' with the correct API route.
 			const response = await axios.post('/api/mynotes', {
 				content,
 				language: 'en',
@@ -58,17 +59,18 @@ export default function CreateNote({}: Props) {
 	}
 
 	return (
-		<div className='mx-auto'>
+		<div >
 			{/* todo. add MarkEdiot */}
 			<form className='flex flex-col divide-y-4'>
 				<div className='flex flex-col lg:flex-row'>
 					<label htmlFor='content'>Content: </label>
-					<input
-						id='content'
-						name='content'
-						type='text'
+					<MDEditor
 						value={content}
-						onChange={(e) => setContent(e.target.value)}
+						onChange={setContent}
+						preview={'edit'}
+						previewOptions={{
+							rehypePlugins: [[rehypeSanitize]]
+						}}
 					/>
 				</div>
 				<button type='submit' onClick={handleSubmit}>

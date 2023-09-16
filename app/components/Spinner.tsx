@@ -1,12 +1,17 @@
 'use client'
 
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 
 type Props = {}
 
 export default function Spinner({}: Props) {
-	  	const [mounted, setMounted] = useState(false)
+	const [mounted, setMounted] = useState(false)
 
-  	if (!mounted) return null
+	useEffect(() => {
+		setMounted(true)
+	}, [])
+
+	if (!mounted) return null
+
 	return <div>Spinner</div>
 }
