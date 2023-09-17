@@ -10,6 +10,7 @@ import { signOut, useSession } from 'next-auth/react'
 import { useEffect, useState } from 'react'
 import ThemeSwitch from './ThemeSwitch'
 import { Bars3Icon } from '@heroicons/react/24/outline'
+import headerNavLinks from '../data/headerNavLinks'
 
 const NavBar = () => {
 	const { data: session } = useSession()
@@ -35,7 +36,7 @@ const NavBar = () => {
 
 	return (
 		<header className='sticky top-0 z-20    border-b-2 border-gray-400/50  '>
-			<nav >
+			<nav>
 				<div className=' flex  flex-row justify-between items-center  p-4 lg:p-6 '>
 					<div>
 						<Link href='/'>
@@ -49,9 +50,16 @@ const NavBar = () => {
 					</div>
 
 					<div className='flex justify-around items-center space-x-2 md:space-x-4'>
-						<Link href='/about'>about</Link>
-
-						<Link href='/note'>note</Link>
+						{headerNavLinks
+							.filter((link) => link.href !== '/')
+							.map((link) => (
+								<Link
+									key={link.title}
+									href={link.href}
+									className='hidden sm:block font-medium text-gray-900 dark:text-gray-100'>
+									{link.title}
+								</Link>
+							))}
 
 						<ThemeSwitch />
 					</div>

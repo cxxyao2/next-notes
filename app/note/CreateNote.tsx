@@ -59,10 +59,14 @@ export default function CreateNote({}: Props) {
 	}
 
 	return (
-		<div >
+		<div>
 			{/* todo. add MarkEdiot */}
 			<form className='flex flex-col divide-y-4'>
-				<div className='flex flex-col lg:flex-row'>
+				<div className='flex flex-col'>
+					<label htmlFor='keywords'>keywords</label>
+					<input type='text' id='keywords' name='keywords' />
+				</div>
+				<div className='flex flex-col'>
 					<label htmlFor='content'>Content: </label>
 					<MDEditor
 						value={content}
