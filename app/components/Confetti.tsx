@@ -17,7 +17,7 @@ export default function MyConfetti() {
 
 	// todo , need to add isConfettiOpen to the store
 	if (!hasMounted || !confetti.isOpen) return null
-  return ( <div className='fixed top-0 left-0 w-[100wh] h-[100vh] z-[100]'>
-    <Confetti width={width} height={height} />
-  </div>)
+	return  <div className='fixed left-0 top-0 h-[100vh] w-[100vw]'>
+		<Confetti width={width} height={height} />
+		</div>
 }

@@ -26,7 +26,7 @@ export default function DailyTasks() {
 
 	if (!hasMounted) return null
 	return (
-		<div className='flex flex-col justify-items-start lg:flex-row '>
+		<div className='flex flex-col gap-4 items-center lg:flex-row '>
 			{' '}
 			{checkboxItems.map((item) => (
 				<div key={item}>
