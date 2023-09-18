@@ -21,13 +21,13 @@ export default function Home() {
 
 				<div className='mb-4 grid gap-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left'>
 					{[1, 2, 3].map((item) => (
-						<WordCard key={item} />
-					))}
-							{[1, 2].map((item) => (
 						<WordCardSkeleton key={item} imageName='/images/a4.webp' />
 					))}
+							{[1, 2].map((item) => (
+						<WordCard key={item} imageName='/images/a4.webp' />
+					))}
 					{[4, 5].map((item) => (
-						<WordCardSkeleton key={item} imageName='/images/a3.webp' />
+						<WordCard key={item} imageName='/images/a3.webp' />
 					))}
 					{[1, 2, 3].map((item) => (
 						<a

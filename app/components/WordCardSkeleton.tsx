@@ -9,7 +9,7 @@ export default function WordCardSkeleton({imageName}: Props) {
 	 return (
     <div
 
-      className="col-span-1 cursor-pointer group"
+      className="animate-pulse col-span-1 cursor-pointer group"
     >
       <div className="flex flex-col gap-2 w-full">
         <div
@@ -21,18 +21,14 @@ export default function WordCardSkeleton({imageName}: Props) {
             rounded-xl
           "
         >
-          <Image
-            fill
+          <div
             className="
-              object-cover
+						bg-rose-400
               h-full
               w-full
-              group-hover:scale-110
-              transition
+
             "
-            src={imageName}
-            alt="Listing"
-          />
+          ></div>
 
           </div>
         </div>
