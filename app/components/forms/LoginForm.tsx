@@ -30,16 +30,15 @@ export default function LoginForm({}: Props) {
 				</button>
 			</div>
 
- <div className="flex items-center py-4">
+			<div className='flex items-center py-4'>
+				<div className='flex-grow h-px bg-gray-400'></div>
 
-        <div className="flex-grow h-px bg-gray-400"></div>
+				<span className='flex-shrink text-gray-500 px-4 italic font-light'>
+					OR
+				</span>
 
-
-        <span className="flex-shrink text-2xl text-gray-500 px-4 italic font-light">OR</span>
-
-
-        <div className="flex-grow h-px bg-gray-400"></div>
-    </div>
+				<div className='flex-grow h-px bg-gray-400'></div>
+			</div>
 			<div>
 				<button type='button' onClick={handleGithubLogin}>
 					GITHUB

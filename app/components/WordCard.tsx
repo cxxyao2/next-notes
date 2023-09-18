@@ -8,7 +8,7 @@ type Props = { imageName: string }
 export default function WordCard({ imageName }: Props) {
 	return (
 		<div className='col-span-1 cursor-pointer group'>
-			<div className='flex flex-col gap-2 w-full'>
+			<div className='flex flex-col gap-2 w-full shadow-sm'>
 				<div
 					className='
             aspect-square
