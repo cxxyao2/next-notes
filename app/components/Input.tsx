@@ -1,7 +1,6 @@
 'use client'
 
-import { FieldErros, FieldValues, UseFormRegister } from 'react-hook-form'
-import DailyTasks from './DailyTasks'
+import { FieldErrors, FieldValues, UseFormRegister } from 'react-hook-form'
 
 interface InputProps {
 	id: string
@@ -10,7 +9,7 @@ interface InputProps {
 	disabled?: boolean
 	required?: boolean
 	register: UseFormRegister<FieldValues>
-	errors: FieldErros
+	errors: FieldErrors
 	placeholder?: string
 }
 
@@ -28,7 +27,7 @@ export default function Input({
 		<div className='w-full flex flex-col-reverse'>
 			{errors[id] && (
 				<p role='alert' className='text-rose-500'>
-					{errors[id].message}
+					{errors[id]?.message?.toString()}
 				</p>
 			)}
 			<input
