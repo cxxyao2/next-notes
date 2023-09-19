@@ -13,7 +13,7 @@ export const authOptions: NextAuthOptions = {
 		strategy: 'jwt'
 	},
 	pages: {
-		signIn: '/sign-in'
+		signIn: '/login'
 	},
 	debug: process.env.NODE_ENV === 'development',
 	providers: [
@@ -56,6 +56,5 @@ export const authOptions: NextAuthOptions = {
 				}
 			}
 		})
-	],
-
+	]
 }

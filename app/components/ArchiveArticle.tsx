@@ -9,7 +9,7 @@ type Props = {
 
 export default function ArchiveArticle({ imageSrc }: Props) {
 	return (
-		<div className='w-full pb-2 border-b-2 border-rose-400 flex  flex-col-reverse  lg:flex-row-reverse justify-between'>
+		<div className='w-full pb-2 border-b-2 border-blue-800 dark:border-blue-300 flex  flex-col-reverse  lg:flex-row-reverse justify-between'>
 			<div className='flex-1 p-4'>
 				<div>title:content</div>
 				<div>

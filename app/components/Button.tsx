@@ -4,7 +4,8 @@ import { IconType } from 'react-icons'
 
 interface ButtonProps {
 	label: string
-	onClick: (e: React.MouseEvent<HTMLButtonElement>) => void
+	type?: 'button' | 'submit' | 'reset'
+	onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void
 	disabled?: boolean
 	outline?: boolean
 	small?: boolean
@@ -17,11 +18,12 @@ const Button: React.FC<ButtonProps> = ({
 	disabled,
 	outline,
 	small,
-	icon: Icon
+	icon: Icon,
+	type = 'button'
 }) => {
 	return (
 		<button
-			type='button'
+			type={type}
 			disabled={disabled}
 			onClick={onClick}
 			className={`

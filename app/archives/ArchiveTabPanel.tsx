@@ -41,7 +41,7 @@ const ArchiveTabPanel: React.FC = () => {
 				</li>
 			</ul>
 
-<hr className='border-b-2 bg-rose-400 my-6'  />
+<hr className='border-b-2 bg-neutral-400 dark:bg-neutral-200 my-6'  />
 
 			{activeTab === 0 && <ArchiveArticles />}
 			{activeTab === 1 && <ArchiveTable />}

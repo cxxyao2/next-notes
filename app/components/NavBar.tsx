@@ -57,10 +57,24 @@ const NavBar = () => {
 								<Link
 									key={link.title}
 									href={link.href}
-									className='hidden sm:block font-medium text-gray-900 dark:text-gray-100'>
+									className='hidden sm:block font-medium text-gray-900 dark:text-gray-100 hover:underline-4 hover:underline-offset-4 hover:underline-blue-400'>
 									{link.title}
 								</Link>
 							))}
+						{!session?.user ? (
+							<Link
+								href='/login'
+								className='hidden sm:block font-medium text-gray-900 dark:text-gray-100'>
+								Login
+							</Link>
+						) : (
+							<a
+								onClick={() => signOut()}
+								href='#'
+								className='hidden sm:block font-medium text-gray-900 dark:text-gray-100'>
+								Log out
+							</a>
+						)}
 						<SearchButton />
 						<ThemeSwitch />
 					</div>

@@ -43,7 +43,7 @@ export default function Home() {
 								</span>
 							</h2>
 							<p className={`m-0 max-w-[30ch] text-sm opacity-50`}>
-								someone is learning IT skills by watching videos and reading
+								Someone is learning IT skills by watching videos and reading
 								books and keep practice
 							</p>
 						</a>
