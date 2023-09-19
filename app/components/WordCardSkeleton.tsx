@@ -32,9 +32,12 @@ export default function WordCardSkeleton({imageName}: Props) {
 
           </div>
         </div>
-        <div className="font-semibold text-lg">
-          Frenceh, Paris
-        </div>
+       <div className="grid grid-cols-7 gap-4 bg-green-400">
+  <div className="col-span-5 bg-gray-500">{''}
+  </div>
+  <div className="col-span-2">
+  </div>
+</div>
         <div className="font-light text-neutral-500">
          montaint
         </div>

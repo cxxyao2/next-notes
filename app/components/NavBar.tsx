@@ -11,6 +11,7 @@ import { useEffect, useState } from 'react'
 import ThemeSwitch from './ThemeSwitch'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import headerNavLinks from '../data/headerNavLinks'
+import SearchButton from './SearchButton'
 
 const NavBar = () => {
 	const { data: session } = useSession()
@@ -39,7 +40,7 @@ const NavBar = () => {
 			<nav>
 				<div className=' flex  flex-row justify-between items-center  p-4 lg:p-6 '>
 					<div>
-						<Link href='/'>
+						<Link href='/' className='flex space-x-2'>
 							home
 							<Bars3Icon
 								className='w-6 h-6 text-gray-500 lg:hidden'
@@ -60,7 +61,7 @@ const NavBar = () => {
 									{link.title}
 								</Link>
 							))}
-
+						<SearchButton />
 						<ThemeSwitch />
 					</div>
 				</div>

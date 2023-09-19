@@ -4,12 +4,15 @@ import React from 'react'
 
 type Props = {}
 
-export default function LoginForm({}: Props) {
-	const handleCommit = () => {
+export default function LoginForm({ }: Props)
+{
+	const handleCommit = () =>
+	{
 		console.log('handleCommit')
 	}
 
-	const handleGithubLogin = () => {
+	const handleGithubLogin = () =>
+	{
 		console.log('handleGithubLogin')
 	}
 
@@ -45,5 +48,7 @@ export default function LoginForm({}: Props) {
 				</button>
 			</div>
 		</div>
+
 	)
+
 }
