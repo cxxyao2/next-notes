@@ -12,6 +12,7 @@ import ThemeSwitch from './ThemeSwitch'
 import { Bars3Icon } from '@heroicons/react/24/outline'
 import headerNavLinks from '../data/headerNavLinks'
 import SearchButton from './SearchButton'
+import { BsBook } from 'react-icons/bs'
 
 const NavBar = () => {
 	const { data: session } = useSession()
@@ -44,9 +45,10 @@ const NavBar = () => {
 				<div className=' flex  flex-row justify-between items-center  p-4 lg:p-6 '>
 					<div>
 						<Link href='/' className='flex space-x-2'>
-							home
+							<BsBook className='w-6 h-6 text-indigo-600 dark:text-indigo-100  mr-4'></BsBook>
+
 							<Bars3Icon
-								className='w-6 h-6 text-gray-500 lg:hidden'
+								className='w-6 h-6 text-gray-500 dark:text-gray-100 lg:hidden'
 								onClick={() => {
 									sidebarState.onOpen()
 								}}></Bars3Icon>

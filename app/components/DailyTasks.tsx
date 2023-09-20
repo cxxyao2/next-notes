@@ -52,7 +52,7 @@ export default function DailyTasks() {
 	if (!hasMounted) return null
 
 	return (
-		<div className='relative left-0 top-0 flex flex-col w-full justify-center border-b space-y-4 border-gray-300   pb-6 pt-8  dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border  lg:p-4 lg:dark:bg-zinc-800/30 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500'>
+		<div className='relative left-0 top-0 flex flex-col w-full justify-center border-b space-y-4 border-gray-300   pb-6 pt-8    lg:w-auto  lg:rounded-xl lg:border  lg:p-4   bg-gradient-to-r from-indigo-400 dark:from-indigo-800 via-purple-400 dark:via-purple-800 to-pink-500 dark:to-neutral-800 dark:border-neutral-200'>
 			<div className='flex flex-col gap-4 justify-start p-2 lg:flex-row '>
 				{' '}
 				{checkboxItems.map((item) => (
