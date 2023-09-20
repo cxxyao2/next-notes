@@ -22,6 +22,7 @@ import { useEffect, useState } from 'react'
 import { useTheme } from 'next-themes'
 
 import useSidebar from '@/app/hooks/useSidebar'
+import {AiOutlineClose} from 'react-icons/ai'
 
 const SideBar = () => {
 	const { data: session } = useSession()
@@ -74,9 +75,9 @@ const SideBar = () => {
 				<button
 					type='button'
 					aria-label='Hide Sidebar'
-					className='absolute text-2xl text-black  top-4 left-52 lg:hidden '
+					className='absolute text-2xl text-black  top-4 left-52 lg:hidden hover:bg-neutral-200  px-2  rounded-sm '
 					onClick={() => sidebarState.onClose()}>
-					X
+					<AiOutlineClose className='h-6 w-6   ' />
 				</button>
 				<div className='space-y-4'>
 					<div className='text-center'>{userName}</div>
@@ -87,20 +88,20 @@ const SideBar = () => {
 									localStorage.removeItem('tokenFromServer')
 									signOut()
 								}}
-								className='text-center   w-full rounded-sm p-1 hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white '>
+								className='text-center   w-full rounded-lg p-2 hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white '>
 								Sign Out
 							</button>
 							<hr className='border-t-[0.1px] border-gray-400' />
 						</>
 					)}
 					<button
-						className='flex items-center space-x-2 p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white '
+						className='flex items-center space-x-2 p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white '
 						onClick={() => router.push('/')}>
 						<HomeIcon className='h-5 w-5 ' />
 						<p>Home </p>
 					</button>
 					<button
-						className='flex items-center space-x-2 p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white '
+						className='flex items-center space-x-2 p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white '
 						onClick={() => router.push('/store')}>
 						<ShoppingCartIcon className='h-5 w-5 ' />
 						<p>Shopping </p>
@@ -132,21 +133,21 @@ const SideBar = () => {
 									<li className='mb-1 last:mb-0'>
 										<button
 											onClick={() => router.push('/search')}
-											className='block text-left -ml-1 p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white transition duration-150'>
+											className='block text-left -ml-1 p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white transition duration-150'>
 											<span>Product</span>
 										</button>
 									</li>
 									<li>
 										<button
 											onClick={() => router.push('/search')}
-											className='block text-left -ml-1 p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white transition duration-150'>
+											className='block text-left -ml-1 p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white transition duration-150'>
 											<span>Client</span>
 										</button>
 									</li>
 									<li>
 										<button
 											onClick={() => router.push('/search')}
-											className='block text-left -ml-1 p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white transition duration-150'>
+											className='block text-left -ml-1 p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white transition duration-150'>
 											<span>Event</span>
 										</button>
 									</li>
@@ -155,31 +156,31 @@ const SideBar = () => {
 						)}
 					</div>
 					<button
-						className='flex items-center space-x-2 p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white'
+						className='flex items-center space-x-2 p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white'
 						onClick={() => router.push(`/profile?person=${userName}`)}>
 						<BookOpenIcon className='h-5 w-5 ' />
 						<p>Your Profile</p>
 					</button>
 					<button
-						className='flex items-center space-x-2 p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white'
+						className='flex items-center space-x-2 p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white'
 						onClick={() => router.push('/dashboard')}>
 						<ChartBarIcon className='h-5 w-5 ' />
 						<p>Dashboard</p>
 					</button>
 					<button
-						className='flex items-center space-x-2  p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white'
+						className='flex items-center space-x-2  p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white'
 						onClick={() => router.push('/')}>
 						<RadioIcon className='h-5 w-5 ' />
 						<p>Latest Events </p>
 					</button>
 					<button
-						className='flex items-center space-x-2  p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white'
+						className='flex items-center space-x-2  p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white'
 						onClick={() => router.push('/about')}>
 						<UserGroupIcon className='h-5 w-5 ' />
 						<p>About </p>
 					</button>
 					<button
-						className='flex items-center space-x-2  p-1 w-full hover:shadow-md hover:shadow-indigo-200  hover:bg-indigo-600 hover:text-white focus:bg-indigo-600 focus:text-white'
+						className='flex items-center space-x-2  p-2 w-full hover:shadow-md hover:shadow-indigo-200    focus:bg-indigo-600 focus:text-white'
 						onClick={() =>
 							theme === 'dark' ? setTheme('light') : setTheme('dark')
 						}>
@@ -187,19 +188,7 @@ const SideBar = () => {
 						<p>Theme </p>
 					</button>
 					<hr className='border-t-[0.1px] border-gray-400' />
-					<button className='flex items-center space-x-2 hover:text-gray-400'>
-						<HomeIcon className='h-5 w-5 ' />
-						<p>Placeholder </p>
-					</button>{' '}
-					<button className='flex items-center space-x-2 hover:text-gray-400'>
-						<HomeIcon className='h-5 w-5 ' />
-						<p>Placeholder </p>
-					</button>{' '}
-					<button className='flex items-center space-x-2 hover:text-gray-400'>
-						<HomeIcon className='h-5 w-5 ' />
-						<p>Placeholder </p>
-					</button>{' '}
-					<button className='flex items-center space-x-2 hover:text-gray-400'>
+					<button className='flex items-center space-x-2 '>
 						<HomeIcon className='h-5 w-5 ' />
 						<p>Placeholder </p>
 					</button>

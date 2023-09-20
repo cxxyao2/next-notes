@@ -163,7 +163,8 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 						key={tag.id}
 						boxLabel={tag.name}
 						isChecked={tags?.includes(tag.id)}
-						toggleCheckbox={() => {
+						toggleCheckbox={(e) => {
+							e.stop
 							const selectedTags: string[] = [...tags]
 							const index = selectedTags.findIndex((id) => id === tag.id)
 							if (index > -1) {
