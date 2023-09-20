@@ -43,16 +43,18 @@ const NavBar = () => {
 		<header className='sticky top-0 z-20    border-b-2 border-gray-400/50  '>
 			<nav>
 				<div className=' flex  flex-row justify-between items-center  p-4 lg:p-6 '>
-					<div>
+					<div className="flex flex-row">
 						<Link href='/' className='flex space-x-2'>
 							<BsBook className='w-6 h-6 text-indigo-600 dark:text-indigo-100  mr-4'></BsBook>
-
+		</Link>
 							<Bars3Icon
 								className='w-6 h-6 text-gray-500 dark:text-gray-100 lg:hidden'
-								onClick={() => {
+								onClick={(e) =>
+								{
+									e.stopPropagation();
 									sidebarState.onOpen()
 								}}></Bars3Icon>
-						</Link>
+
 					</div>
 
 					<div className='flex justify-around items-center space-x-2 md:space-x-4'>

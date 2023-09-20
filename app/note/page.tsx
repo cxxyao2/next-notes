@@ -1,15 +1,17 @@
 import getAllTags from '../actions/getAllTags'
+import getCurrentUser from '../actions/getCurrentUser'
 import ClientOnly from '../components/ClientOnly'
 import CreateNote from './CreateNote'
 
 export default async function Page() {
-	const tags = await getAllTags()
+	const data = await getAllTags()
+	const currentUser = await getCurrentUser()
 
-	console.log('server side tags:', tags)
+
 
 	return (
 		<ClientOnly>
-			<CreateNote allTags={tags} />
+			<CreateNote allTags={data?.tags} currentUser={currentUser}/>
 		</ClientOnly>
 	)
 }

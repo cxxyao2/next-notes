@@ -1,14 +1,18 @@
+import getCurrentUser from './actions/getCurrentUser'
 import Confetti from './components/Confetti'
 import DailyTasks from './components/DailyTasks'
 import WordCard from './components/WordCard'
 
-export default function Home() {
+export default async function Home()
+{
+	const currentUser = await getCurrentUser()
+	
 	return (
 		<>
 			<Confetti />
 			<div className='flex  flex-col items-center justify-between'>
 				<div className='mb-4 lg:max-w-5xl w-full '>
-					<DailyTasks />
+					<DailyTasks currentUser={currentUser} />
 				</div>
 
 				<div className='mb-4 grid gap-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left'>

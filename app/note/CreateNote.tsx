@@ -8,21 +8,26 @@ import DatePicker from 'react-datepicker'
 import { useForm, Controller, FieldValues } from 'react-hook-form'
 import MDEditor from '@uiw/react-md-editor'
 import rehypeSanitize from 'rehype-sanitize'
-import Input from '../components/Input'
+
 import { Tag } from '@prisma/client'
 import Checkbox from '../components/Checkbox'
 import RadioGroup from '../components/RadioGroup'
+import InputNoHook from '../components/InputNoHook'
+import Button from '../components/Button'
+import { SafeUser } from '../types'
 
 type Props = {
 	allTags: Tag[] | undefined | null
+	currentUser: SafeUser | null | undefined
 }
 
-export default function CreateNote({ allTags }: Props) {
+export default function CreateNote({ allTags,currentUser }: Props) {
 	const [isLoading, setIsLoading] = useState(false)
+
+	console.log('alltags', allTags)
 
 	const {
 		control,
-		register,
 		setValue,
 		watch,
 		formState: { errors }
@@ -76,7 +81,8 @@ export default function CreateNote({ allTags }: Props) {
 				language,
 				category,
 				tags,
-				occurredAt: occurredAt.toISOString()
+				occurredAt: occurredAt.toISOString(),
+				userId: currentUser?.id
 			})
 			console.log('Record update:', response.data)
 		} catch (error) {
@@ -86,7 +92,7 @@ export default function CreateNote({ allTags }: Props) {
 
 	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
-
+  setIsLoading(true)
 		try {
 			const response = await axios.post('/api/mynotes', {
 				keywords,
@@ -96,11 +102,15 @@ export default function CreateNote({ allTags }: Props) {
 				tags,
 				occurredAt: new Date().toISOString()
 			})
+			setIsLoading(false)
 			console.log('Record created:', response.data)
 		} catch (error) {
+			setIsLoading(false)
 			console.error('Error creating a new record:', error)
 		}
 	}
+
+	if(!allTags || allTags.length === 0) return null
 
 	return (
 		<div className='flex flex-col gap-4'>
@@ -114,7 +124,7 @@ export default function CreateNote({ allTags }: Props) {
 					setCustomValue('language', e.target.value)
 				}}
 			/>
-			<p className='text-md font-semibold mt-8'>Category</p>
+			<p className='text-md font-semibold'>Category</p>
 			<Controller
 				name='category'
 				control={control}
@@ -130,11 +140,15 @@ export default function CreateNote({ allTags }: Props) {
 				)}
 			/>
 
+<div className='grid grid-cols-2 lg:grid-cols-3 gap-4'>
+<p className='text-md font-semibold col-start-1 col-span-2 lg:col-span-3'>Tags</p>
+
 			{allTags?.map((tag) => (
+
 				<Checkbox
 					key={tag.id}
 					boxLabel={tag.name}
-					isChecked={tags.include(tag.id)}
+					isChecked={tags?true:false}
 					toggleCheckbox={() => {
 						const selectedTags: string[] = [...tags]
 						const index = selectedTags.findIndex((id) => id === tag.id)
@@ -147,26 +161,31 @@ export default function CreateNote({ allTags }: Props) {
 					}}
 				/>
 			))}
+			</div>
 
-			<div className='flex flex-col'>
-			<DatePicker
-				selected={occurredAt}
-				onChange={(date) => setCustomValue('occurredAt', date)}
-				showTimeSelect
-				dateFormat='MMMM d, yyyy h:mm aa'
+			<div className='flex flex-col my-6'>
+				<DatePicker
+					selected={occurredAt}
+					onChange={(date) => setCustomValue('occurredAt', date)}
+					showTimeSelect
+					dateFormat='MMMM d, yyyy h:mm aa'
 				/>
-				</div>
+			</div>
 
-			{/* <Input
+			<InputNoHook
 				id='keywords'
 				label='keywords'
 				disabled={isLoading}
 				type='text'
-				register={register}
+				value={keywords}
+				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+					setCustomValue('keywords', e.target.value)
+				}
 				required
-			/> */}
+			/>
+
 			<div className='flex flex-col'>
-				<label htmlFor='content' className='text-md'>
+				<label htmlFor='content' className='text-md mb-6 font-semibold'>
 					Content:
 				</label>
 				<MDEditor
@@ -178,15 +197,18 @@ export default function CreateNote({ allTags }: Props) {
 					}}
 				/>
 			</div>
-			<button type='submit' onClick={handleSubmit}>
+			<Button label='Post' type='submit' disabled={isLoading}
+			onClick={handleSubmit}
+			outline />
+			{/* <button type='submit' onClick={handleSubmit}>
 				Submit
-			</button>
-			<button type='button' onClick={handleDelete}>
+			</button> */}
+			{/* <button type='button' onClick={handleDelete}>
 				delete 1
 			</button>
 			<button type='button' onClick={handleUpdate}>
 				update 2
-			</button>
+			</button> */}
 		</div>
 	)
 }

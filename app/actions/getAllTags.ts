@@ -22,7 +22,7 @@ export default async function getAllTags() {
 		}
 
 		return {
-			...tags
+			tags
 		}
 	} catch (error: any) {
 		return null

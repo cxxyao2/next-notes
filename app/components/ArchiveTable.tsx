@@ -33,9 +33,9 @@ export default function ArchiveTable() {
 				</span>
 				.
 			</div>
-			<div className='mt-4 w-full h-5/6 overflow-auto'>
-				<table className='table-fixed min-w-full divide-y divide-gray-200 text-center'>
-					<thead className='sticky top-0 bg-gray-100'>
+			<div className='mt-4 w-full h-full overflow-auto'>
+				<table className='table-fixed min-w-full divide-y divide-gray-200 text-center shadow'>
+					<thead className='sticky top-0'>
 						<tr>
 							<th >Month</th> <th>Words</th> <th>Articles</th> <th>Diaries</th>
 						</tr>
@@ -44,7 +44,7 @@ export default function ArchiveTable() {
 						{archiveStats.map((item, index) => (
 							<tr
 								key={index}
-								className='bg-white even:bg-gray-100 p-2 '>
+								className=' even:bg-gray-200 dark:even:bg-gray-800 p-2 '>
 								<td className='p-2 text-left'>{item.month}</td>
 								<td className='p-2'>{item.words}</td>
 								<td className='p-2'>{item.articles}</td>
