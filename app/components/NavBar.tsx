@@ -23,6 +23,9 @@ const NavBar = () => {
 		null
 	)
 
+	// todo should deleted after testing
+	console.log('navbar refresh')
+
 	const sidebarState = useSidebar()
 
 	useEffect(() => {

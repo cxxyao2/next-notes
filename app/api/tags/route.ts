@@ -4,18 +4,18 @@ import { NextRequest, NextResponse } from 'next/server'
 
 export async function GET(request: NextRequest) {
 	try {
-		const users = await db.mynote.findMany()
+		const tags = await db.tag.findMany()
 
 		return NextResponse.json(
 			{
-				users,
-				message: 'User Get successfully'
+				tags,
+				message: 'Tag Get successfully'
 			},
 			{ status: 200 }
 		)
 	} catch (error) {
 		return NextResponse.json(
-			{ user: null, message: 'Something went wrong' },
+			{ tags: null, message: 'Something went wrong' },
 			{ status: 500 }
 		)
 	}
@@ -25,31 +25,24 @@ export async function POST(request: NextRequest) {
 	// todo: get current user id
 
 	try {
-		const { keywords, language, category, content, occurredAt, tags } =
-			await request.json()
+		const { name } = await request.json()
 
-		const newNote = await db.mynote.create({
+		const newTag = await db.tag.create({
 			data: {
-				keywords,
-				language,
-				category,
-				content,
-				occurredAt,
-				tags,
-				userId: 'clmqxmf8f0000tmaknith53hm'
+				name
 			}
 		})
 
 		return NextResponse.json(
 			{
-				note: newNote,
-				message: 'Note created successfully'
+				tag: newTag,
+				message: 'Tag created successfully'
 			},
 			{ status: 201 }
 		)
 	} catch (error) {
 		return NextResponse.json(
-			{ NodeIterator: null, message: 'Something went wrong' },
+			{ tag: null, message: 'Something went wrong' },
 			{ status: 500 }
 		)
 	}

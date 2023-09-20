@@ -16,6 +16,8 @@ export default function DailyTasks() {
 	const { data: session } = useSession()
 	let setTimeOutId: any
 
+	console.log('session is', session)
+
 	useEffect(() => {
 		setHasMounted(true)
 		return () => {
@@ -34,7 +36,7 @@ export default function DailyTasks() {
 			const response = await axios.get('https://api.ipify.org?format=json')
 			await axios.post('/api/checkhistories', {
 				ip: response.data.ip as string,
-				userId: 3
+				userId: '3'
 			}) // todo get userId from session
 
 			confetti.onOpen()
@@ -50,7 +52,7 @@ export default function DailyTasks() {
 	if (!hasMounted) return null
 
 	return (
-		<div className='relative left-0 top-0 flex flex-col w-full justify-center border-b space-y-4 border-gray-300 bg-gradient-to-b from-zinc-200 pb-6 pt-8 backdrop-blur-2xl dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border lg:bg-gray-200 lg:p-4 lg:dark:bg-zinc-800/30'>
+		<div className='relative left-0 top-0 flex flex-col w-full justify-center border-b space-y-4 border-gray-300   pb-6 pt-8  dark:border-neutral-800 dark:bg-zinc-800/30 dark:from-inherit lg:static lg:w-auto  lg:rounded-xl lg:border  lg:p-4 lg:dark:bg-zinc-800/30 bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-500'>
 			<div className='flex flex-col gap-4 justify-start p-2 lg:flex-row '>
 				{' '}
 				{checkboxItems.map((item) => (
@@ -74,12 +76,14 @@ export default function DailyTasks() {
 			<div className='rounded-lg p-2'>
 				<Image
 					src={session?.user?.image || '/images/avatar-placeholder.jpg'}
-					width={100}
-					height={100}
-					className='w-8 h-8 rounded-full border-2 border-gray-500 inline-block'
+					width={30}
+					height={30}
+					className='rounded-full border-2 border-gray-500 inline-block'
 					alt='avatar'
 				/>
-				<span className='ml-2 text-sm'>{session?.user?.name || 'Please log in.'}</span>
+				<span className='ml-2 text-sm'>
+					{session?.user?.name || 'Please log in.'}
+				</span>
 			</div>
 		</div>
 	)

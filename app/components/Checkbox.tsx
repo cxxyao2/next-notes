@@ -1,19 +1,16 @@
 'use client'
 
-import React, { useState } from 'react'
-
 type Props = {
 	boxLabel: string
+	isChecked: boolean
+	toggleCheckbox: () => void
 }
 
-export default function Checkbox({ boxLabel }: Props) {
-	const [isChecked, setIsChecked] = useState(false)
-
-	const toggleCheckbox = () => {
-		console.log('toggleCheckbox')
-		setIsChecked((state) => !state)
-	}
-
+export default function Checkbox({
+	boxLabel,
+	isChecked,
+	toggleCheckbox
+}: Props) {
 	return (
 		<label
 			className={`inline-block relative cursor-pointer  ${

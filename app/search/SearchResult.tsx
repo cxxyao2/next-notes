@@ -26,7 +26,7 @@ export default function SearchResult({}: Props) {
 			<h1 className='font-extrabold text-4xl max-w-full my-8'>
 				Search your favorite notes:
 			</h1>
-			<div className='relative my-4  mb-6 max-w-full w-5/6'>
+			<div className='relative my-4  mb-6 max-w-full w-5/6 dark:bg-neutral-600'>
 				<div className='flex border-2 border-gray-300 rounded-md overflow-hidden shadow justify-center'>
 					<div className="flex-1 flex items-center p-2  ">
 						<svg
@@ -49,7 +49,7 @@ export default function SearchResult({}: Props) {
 						<input
 							type='text'
 							id='keywords'
-							className='w-full min-w-0 pl-11 outline-none'
+							className='w-full min-w-0 pl-11 outline-none dark:bg-neutral-600'
 							placeholder='enter keywords...'
 							autoComplete='off'
 							spellCheck='false'

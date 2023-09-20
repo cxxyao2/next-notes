@@ -9,7 +9,7 @@ interface InputProps {
 	disabled?: boolean
 	required?: boolean
 	register: UseFormRegister<FieldValues>
-	errors: FieldErrors
+	errors?: FieldErrors
 	placeholder?: string
 }
 

@@ -8,7 +8,6 @@ import { toast } from 'react-hot-toast'
 import { FieldValues, SubmitHandler, useForm } from 'react-hook-form'
 import * as z from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
-import { Role } from '@prisma/client'
 import { AiFillGithub } from 'react-icons/ai'
 
 import React from 'react'
@@ -50,8 +49,8 @@ export default function RegisterForm() {
 
 		signIn(provider, { ...data, redirect: false })
 			.then((callback: any) => {
+				setIsLoading(false)
 				if (callback?.ok) {
-					setIsLoading(false)
 					toast.success('Logged in successfully')
 					router.push('/')
 				}
@@ -61,6 +60,7 @@ export default function RegisterForm() {
 				}
 			})
 			.catch((err) => {
+				setIsLoading(false)
 				toast.error(err)
 			})
 	}
@@ -99,7 +99,7 @@ export default function RegisterForm() {
 					label='Continue with Github'
 					type='button'
 					icon={AiFillGithub}
-					onClick={() => signIn('github',{callbackUrl:'/'})}
+					onClick={() => signIn('github', { callbackUrl: '/' })}
 				/>
 				<div className='text-center mt-4 font-light'>
 					<p>

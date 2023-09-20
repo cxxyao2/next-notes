@@ -18,13 +18,13 @@ export async function DELETE(
 		if (!currentUser) return NextResponse.error()
 
 		const { noteId } = params
-		if (!noteId || isNaN(parseInt(noteId))) throw new Error('Invalid ID')
+		if (!noteId ) throw new Error('Invalid ID')
 
-		const id = parseInt(noteId)
+
 
 		const currentNote = await prisma.mynote.findUnique({
 			where: {
-				id,
+				id:noteId,
 				userId: currentUser?.id
 			}
 		})
@@ -33,7 +33,7 @@ export async function DELETE(
 
 		const deletedNote = await prisma.mynote.deleteMany({
 			where: {
-				id: id,
+				id: noteId,
 				userId: currentUser.id
 			}
 		})
@@ -56,18 +56,18 @@ export async function PUT(request: Request, { params }: { params: IParams }) {
 		const body = await request.json()
 		const { language, category, content, occurredAt, tags } = body
 
-		if (!noteId || isNaN(parseInt(noteId))) throw new Error('Invalid ID')
+		if (!noteId) throw new Error('Invalid ID')
 
 		const currentUser = await getCurrentUser()
 		if (!currentUser) {
 			throw new Error('Invalid user')
 		}
 
-		const id = parseInt(noteId)
+
 
 		const currentNote = await prisma.mynote.findUnique({
 			where: {
-				id,
+				id:noteId,
 				userId: currentUser?.id
 			}
 		})
@@ -78,7 +78,7 @@ export async function PUT(request: Request, { params }: { params: IParams }) {
 
 		const newNote = await prisma?.mynote.update({
 			where: {
-				id
+				id:noteId
 			},
 			data: {
 				language,

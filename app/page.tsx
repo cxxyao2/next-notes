@@ -1,7 +1,6 @@
 import Confetti from './components/Confetti'
 import DailyTasks from './components/DailyTasks'
 import WordCard from './components/WordCard'
-import WordCardSkeleton from './components/WordCardSkeleton'
 
 export default function Home() {
 	return (

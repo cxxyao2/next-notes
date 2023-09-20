@@ -7,12 +7,12 @@ const ScrollToTop = () => {
 	const [visible, setVisible] = useState(false)
 	const [mounted, setMounted] = useState(false)
 
-
+	// todo need delete
+	console.log('ScrollToTop refresh')
 
 	const toggleVisible = () => {
 		const scrolled =
 			document.documentElement.scrollTop || document.body.scrollTop
-		console.log('scrooled', scrolled)
 		if (scrolled > 100) {
 			setVisible(true)
 		} else if (scrolled <= 300) {
@@ -32,7 +32,7 @@ const ScrollToTop = () => {
 		return () => {
 			window.removeEventListener('scroll', toggleVisible)
 		}
-	})
+	}, [])
 
 	useEffect(() => {
 		setMounted(true)
