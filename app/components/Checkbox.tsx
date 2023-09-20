@@ -1,4 +1,5 @@
 'use client'
+import { name } from './../../.next/server/app/search/page'
 
 type Props = {
 	boxLabel: string
@@ -12,22 +13,23 @@ export default function Checkbox({
 	toggleCheckbox
 }: Props) {
 	return (
-		<label
-			className={`inline-block relative cursor-pointer text-center  ${
-				isChecked ? 'checked' : ''
-			}`}>
-			<input
+		<div className='flex'>
+
+			<label
+				htmlFor={boxLabel}
+				className={` inline-block w-full h-full p-2 transition-all duration-300 rounded-lg border-2 border-solid border-neutral-400 bg-neutral-200 text-black ${
+					isChecked ? '!bg-blue-600 !border-blue-200 text-white' : ''
+				} `}>
+				{boxLabel}
+					<input
+				id={boxLabel}
+				name={boxLabel}
 				type='checkbox'
 				checked={isChecked}
 				onChange={toggleCheckbox}
-				className='hidden'
+				className='  ml-4'
 			/>
-			<span
-				className={` inline-block w-full h-full p-2 transition-all duration-300 rounded-lg border-2 border-solid border-gray-500 bg-neutral-200 dark:bg-neutral-800 dark:border-gray-200 ${
-					isChecked ? 'bg-blue-600 border-blue-400 text-white' : ''
-				} `}>
-				{boxLabel}
-			</span>
-		</label>
+			</label>
+		</div>
 	)
 }

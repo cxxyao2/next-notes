@@ -114,7 +114,7 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 
 	return (
 		<div className='flex flex-col gap-4'>
-			<label className='text-2xl font-semibold text-rose-600 dark:text-rose-200'>
+			<label className='text-2xl font-semibold text-blue-600 dark:text-blue-200'>
 				Craft your note
 			</label>
 			<RadioGroup
@@ -136,6 +136,17 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 							{ value: 'topic', label: 'topic' },
 							{ value: 'diary', label: 'diary' }
 						]}
+						 classNames={{
+
+          option: () => 'dark:text-black'
+        }}
+						 theme={(theme) => ({
+          ...theme,
+          borderRadius: 6,
+          colors: {
+            ...theme.colors
+          }
+        })}
 					/>
 				)}
 			/>
@@ -148,7 +159,7 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 				<Checkbox
 					key={tag.id}
 					boxLabel={tag.name}
-					isChecked={tags?true:false}
+					isChecked={tags?.includes(tag.id)}
 					toggleCheckbox={() => {
 						const selectedTags: string[] = [...tags]
 						const index = selectedTags.findIndex((id) => id === tag.id)
@@ -164,8 +175,8 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 			</div>
 
 			<div className='flex flex-col my-6  p-2'>
-				<p className='text-md font-semibold mb-4 px-4 py-2'>Occurred At:</p>
-				<DatePicker className='border-2 border-neutral-600 dark:border-neutral-200 rounded-lg px-4 py-2'
+				<p className='text-md font-semibold mb-4'>Occurred At:</p>
+				<DatePicker className='border-2 border-neutral-600 dark:border-neutral-200 rounded-lg p-2 pr-6'
 					selected={occurredAt}
 					onChange={(date) => setCustomValue('occurredAt', date)}
 					showTimeSelect

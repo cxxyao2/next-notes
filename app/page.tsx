@@ -6,7 +6,7 @@ import WordCard from './components/WordCard'
 export default async function Home()
 {
 	const currentUser = await getCurrentUser()
-	
+
 	return (
 		<>
 			<Confetti />
@@ -15,7 +15,7 @@ export default async function Home()
 					<DailyTasks currentUser={currentUser} />
 				</div>
 
-				<div className='mb-4 grid gap-2 text-center lg:max-w-5xl lg:w-full lg:mb-0 lg:grid-cols-3 lg:text-left'>
+				<div className='mb-4 w-full   grid grid-col-1 gap-4 text-center md:mx-auto lg:max-w-5xl  lg:mb-0 md:grid-cols-2 lg:grid-cols-3 lg:text-left'>
 {/* need to make skeleton invisable conditionally */}
 					{/* {[1, 2, 3].map((item) => (
 						<WordCardSkeleton key={item} imageName='/images/a4.webp' />
