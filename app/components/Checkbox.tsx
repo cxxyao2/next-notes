@@ -4,7 +4,7 @@ import { name } from './../../.next/server/app/search/page'
 type Props = {
 	boxLabel: string
 	isChecked: boolean
-	toggleCheckbox: () => void
+	toggleCheckbox: (e:any) => void
 }
 
 export default function Checkbox({

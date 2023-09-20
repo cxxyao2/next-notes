@@ -5,7 +5,7 @@ import { Inter } from 'next/font/google'
 import SideBar from './components/SideBar'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
-import Spinner from './components/Spinner'
+import Loader from './components/Loader'
 import ScrollToTop from './components/ScrollToTop'
 
 import ClientSessionProvider from './components/ClientSessionProvider'
@@ -42,7 +42,7 @@ export default function RootLayout({
 										</section>
 									<Footer />
 									</main>
-									<Spinner />
+									<Loader />
 									<ScrollToTop />
 								</div>
 							</div>
