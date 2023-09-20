@@ -6,6 +6,7 @@ import axios from 'axios'
 import DatePicker from 'react-datepicker'
 
 import { useForm, Controller, FieldValues } from 'react-hook-form'
+import { toast } from 'react-hot-toast'
 import MDEditor from '@uiw/react-md-editor'
 import rehypeSanitize from 'rehype-sanitize'
 
@@ -21,7 +22,7 @@ type Props = {
 	currentUser: SafeUser | null | undefined
 }
 
-export default function CreateNote({ allTags,currentUser }: Props) {
+export default function CreateNote({ allTags, currentUser }: Props) {
 	const [isLoading, setIsLoading] = useState(false)
 
 	console.log('alltags', allTags)
@@ -92,7 +93,7 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 
 	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
-  setIsLoading(true)
+		setIsLoading(true)
 		try {
 			const response = await axios.post('/api/mynotes', {
 				keywords,
@@ -103,14 +104,16 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 				occurredAt: new Date().toISOString()
 			})
 			setIsLoading(false)
+					toast.success('Saved successfully')
 			console.log('Record created:', response.data)
 		} catch (error) {
 			setIsLoading(false)
+					toast.error('Failed' + JSON.stringify(error))
 			console.error('Error creating a new record:', error)
 		}
 	}
 
-	if(!allTags || allTags.length === 0) return null
+	if (!allTags || allTags.length === 0) return null
 
 	return (
 		<div className='flex flex-col gap-4'>
@@ -136,47 +139,48 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 							{ value: 'topic', label: 'topic' },
 							{ value: 'diary', label: 'diary' }
 						]}
-						 classNames={{
-
-          option: () => 'dark:text-black'
-        }}
-						 theme={(theme) => ({
-          ...theme,
-          borderRadius: 6,
-          colors: {
-            ...theme.colors
-          }
-        })}
+						classNames={{
+							option: () => 'dark:text-black'
+						}}
+						theme={(theme) => ({
+							...theme,
+							borderRadius: 6,
+							colors: {
+								...theme.colors
+							}
+						})}
 					/>
 				)}
 			/>
 
-<div className='grid grid-cols-2 lg:grid-cols-3 gap-4'>
-<p className='text-md font-semibold col-start-1 col-span-2 lg:col-span-3'>Tags</p>
+			<div className='grid grid-cols-2 lg:grid-cols-3 gap-4'>
+				<p className='text-md font-semibold col-start-1 col-span-2 lg:col-span-3'>
+					Tags
+				</p>
 
-			{allTags?.map((tag) => (
-
-				<Checkbox
-					key={tag.id}
-					boxLabel={tag.name}
-					isChecked={tags?.includes(tag.id)}
-					toggleCheckbox={() => {
-						const selectedTags: string[] = [...tags]
-						const index = selectedTags.findIndex((id) => id === tag.id)
-						if (index > -1) {
-							selectedTags.splice(index, 1)
-						} else {
-							selectedTags.push(tag.id)
-						}
-						setCustomValue('tags', selectedTags)
-					}}
-				/>
-			))}
+				{allTags?.map((tag) => (
+					<Checkbox
+						key={tag.id}
+						boxLabel={tag.name}
+						isChecked={tags?.includes(tag.id)}
+						toggleCheckbox={() => {
+							const selectedTags: string[] = [...tags]
+							const index = selectedTags.findIndex((id) => id === tag.id)
+							if (index > -1) {
+								selectedTags.splice(index, 1)
+							} else {
+								selectedTags.push(tag.id)
+							}
+							setCustomValue('tags', selectedTags)
+						}}
+					/>
+				))}
 			</div>
 
 			<div className='flex flex-col my-6  p-2'>
 				<p className='text-md font-semibold mb-4'>Occurred At:</p>
-				<DatePicker className='border-2 border-neutral-600 dark:border-neutral-200 rounded-lg p-2 pr-6'
+				<DatePicker
+					className='border-2 border-neutral-600 dark:border-neutral-200 rounded-lg p-2 pr-6'
 					selected={occurredAt}
 					onChange={(date) => setCustomValue('occurredAt', date)}
 					showTimeSelect
@@ -209,9 +213,12 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 					}}
 				/>
 			</div>
-			<Button label='Post' type='submit' disabled={isLoading}
-			onClick={handleSubmit}
-			 />
+			<Button
+				label='Post'
+				type='submit'
+				disabled={isLoading}
+				onClick={handleSubmit}
+			/>
 			{/* <button type='submit' onClick={handleSubmit}>
 				Submit
 			</button> */}

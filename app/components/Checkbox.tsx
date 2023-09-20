@@ -14,7 +14,6 @@ export default function Checkbox({
 }: Props) {
 	return (
 		<div className='flex'>
-
 			<label
 				htmlFor={boxLabel}
 				className={` inline-block w-full h-full p-2 transition-all duration-300 rounded-lg border-2 border-solid border-neutral-400 bg-neutral-200 text-black ${
