@@ -11,7 +11,7 @@ import ScrollToTop from './components/ScrollToTop'
 import ClientSessionProvider from './components/ClientSessionProvider'
 import ThemeProvider from './components/ThemeProvider'
 import ClientOnly from './components/ClientOnly'
-import Confettie from './components/Confetti'
+import 'react-datepicker/dist/react-datepicker.css'
 
 const inter = Inter({ subsets: ['latin'] })
 

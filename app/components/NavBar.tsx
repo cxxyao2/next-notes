@@ -45,7 +45,7 @@ const NavBar = () => {
 				<div className=' flex  flex-row justify-between items-center  p-4 lg:p-6 '>
 					<div className="flex flex-row">
 						<Link href='/' className='flex space-x-2'>
-							<BsBook className='w-6 h-6 text-indigo-600 dark:text-indigo-100  mr-4'></BsBook>
+							<BsBook className='w-6 h-6 text-rose-600 dark:text-rose-100  mr-4'></BsBook>
 		</Link>
 							<Bars3Icon
 								className='w-6 h-6 text-gray-500 dark:text-gray-100 lg:hidden'

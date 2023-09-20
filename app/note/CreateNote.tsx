@@ -114,7 +114,7 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 
 	return (
 		<div className='flex flex-col gap-4'>
-			<label className='text-2xl font-semibold text-blue-600 dark:text-blue-200'>
+			<label className='text-2xl font-semibold text-rose-600 dark:text-rose-200'>
 				Craft your note
 			</label>
 			<RadioGroup
@@ -163,8 +163,9 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 			))}
 			</div>
 
-			<div className='flex flex-col my-6'>
-				<DatePicker
+			<div className='flex flex-col my-6  p-2'>
+				<p className='text-md font-semibold mb-4 px-4 py-2'>Occurred At:</p>
+				<DatePicker className='border-2 border-neutral-600 dark:border-neutral-200 rounded-lg px-4 py-2'
 					selected={occurredAt}
 					onChange={(date) => setCustomValue('occurredAt', date)}
 					showTimeSelect
@@ -199,7 +200,7 @@ export default function CreateNote({ allTags,currentUser }: Props) {
 			</div>
 			<Button label='Post' type='submit' disabled={isLoading}
 			onClick={handleSubmit}
-			outline />
+			 />
 			{/* <button type='submit' onClick={handleSubmit}>
 				Submit
 			</button> */}
