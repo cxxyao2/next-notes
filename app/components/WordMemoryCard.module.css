@@ -1,7 +1,7 @@
 /* flip container. remove perspective if you don't want the 3D effect */
 .flipcard {
 	background-color: transparent;
-	width: 200px;
+	width: 300px;
 	height: 200px;
 	border: 1px solid #f1f1f1;
 }
@@ -45,6 +45,8 @@
 }
 
 .centered {
+	font-size:20px;
+	font-weight: bold;
 	position: absolute;
 	top: 50%; /* Center vertically */
 	left: 50%; /* Center horizontally */
