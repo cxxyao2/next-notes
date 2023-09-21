@@ -17,13 +17,16 @@ import InputNoHook from '../components/InputNoHook'
 import Button from '../components/Button'
 import { SafeUser } from '../types'
 
+import useLoader from '../hooks/useLoader'
+import { CATEGORIES } from '../data/consts'
+
 type Props = {
 	allTags: Tag[] | undefined | null
 	currentUser: SafeUser | null | undefined
 }
 
 export default function CreateNote({ allTags, currentUser }: Props) {
-	const [isLoading, setIsLoading] = useState(false)
+	const { isLoading, onClose, onOpen } = useLoader()
 
 	console.log('alltags', allTags)
 
@@ -34,8 +37,8 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 		formState: { errors }
 	} = useForm<FieldValues>({
 		defaultValues: {
-			category: 'word',
-			keywords: 'library company',
+			category: { label: 'word', value: 'word' },
+			keywords: '',
 			content: '',
 			language: 'en',
 			tags: [],
@@ -62,7 +65,6 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 		e.preventDefault()
 
 		try {
-			// Replace 'http://localhost:3000/api/createRecord' with the correct API route.
 			const deletedId = 1
 			const response = await axios.delete(`/api/mynotes/${deletedId}`)
 			console.log('Record deleted:', response.data)
@@ -80,9 +82,9 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 				keywords,
 				content,
 				language,
-				category,
+				category: category.value,
 				tags,
-				occurredAt: occurredAt.toISOString(),
+				occurredAt,
 				userId: currentUser?.id
 			})
 			console.log('Record update:', response.data)
@@ -93,22 +95,23 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 
 	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault()
-		setIsLoading(true)
+		onOpen()
 		try {
 			const response = await axios.post('/api/mynotes', {
 				keywords,
 				content,
 				language,
-				category,
+				category: category.value,
 				tags,
-				occurredAt: new Date().toISOString()
+				occurredAt,
+				userId: currentUser?.id
 			})
-			setIsLoading(false)
-					toast.success('Saved successfully')
+			onClose()
+			toast.success('Saved successfully')
 			console.log('Record created:', response.data)
 		} catch (error) {
-			setIsLoading(false)
-					toast.error('Failed' + JSON.stringify(error))
+			onClose()
+			toast.error('Failed' + JSON.stringify(error))
 			console.error('Error creating a new record:', error)
 		}
 	}
@@ -134,11 +137,10 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 				render={({ field }) => (
 					<Select
 						{...field}
-						options={[
-							{ value: 'word', label: 'word' },
-							{ value: 'topic', label: 'topic' },
-							{ value: 'diary', label: 'diary' }
-						]}
+						options={CATEGORIES.map((item) => ({
+							value: item,
+							label: item
+						}))}
 						classNames={{
 							option: () => 'dark:text-black'
 						}}
@@ -195,6 +197,7 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 				disabled={isLoading}
 				type='text'
 				value={keywords}
+				placeholder='Enter keywords'
 				onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
 					setCustomValue('keywords', e.target.value)
 				}

@@ -1,6 +1,7 @@
-import { bcryptPasswordHash } from '@/app/lib/bcryptHandlers'
+
 import db from '@/app/lib/prismadb'
 import { NextRequest, NextResponse } from 'next/server'
+import getCurrentUser from '@/app/actions/getCurrentUser'
 
 export async function GET(request: NextRequest) {
 	try {
@@ -22,10 +23,10 @@ export async function GET(request: NextRequest) {
 }
 
 export async function POST(request: NextRequest) {
-	// todo: get current user id
+
 
 	try {
-		const { keywords, language, category, content, occurredAt, tags } =
+		const { keywords, language, category, content, occurredAt, tags,userId } =
 			await request.json()
 
 		const newNote = await db.mynote.create({
@@ -36,7 +37,7 @@ export async function POST(request: NextRequest) {
 				content,
 				occurredAt,
 				tags,
-				userId: 'clmqxmf8f0000tmaknith53hm'
+				userId
 			}
 		})
 
@@ -47,9 +48,11 @@ export async function POST(request: NextRequest) {
 			},
 			{ status: 201 }
 		)
-	} catch (error) {
+	} catch (error)
+	{
+		console.log('error note server',error)
 		return NextResponse.json(
-			{ NodeIterator: null, message: 'Something went wrong' },
+			{ note: null, message: 'Something went wrong' },
 			{ status: 500 }
 		)
 	}

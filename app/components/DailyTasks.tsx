@@ -8,8 +8,9 @@ import { useSession } from 'next-auth/react'
 import Image from 'next/image'
 
 import { SafeUser } from '../types'
+import { CATEGORIES } from '../data/consts'
 
-const checkboxItems = ['word', 'article', 'note']
+
 
 interface DailyTasksProps {
 	currentUser: SafeUser | null | undefined
@@ -19,6 +20,8 @@ export default function DailyTasks({ currentUser }: DailyTasksProps) {
 	const confetti = useConfetti()
 	const [hasMounted, setHasMounted] = useState(false)
 	const checkboxRefs: Array<HTMLInputElement | null> = []
+	const checkboxItems = CATEGORIES
+
 	const { data: session } = useSession()
 	let setTimeOutId: any
 

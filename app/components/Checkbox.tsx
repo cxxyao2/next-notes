@@ -1,5 +1,4 @@
 'use client'
-import { name } from './../../.next/server/app/search/page'
 
 type Props = {
 	boxLabel: string
@@ -26,7 +25,7 @@ export default function Checkbox({
 				type='checkbox'
 				checked={isChecked}
 				onChange={toggleCheckbox}
-				className='  ml-4'
+				className='  ml-4 text-xl'
 			/>
 			</label>
 		</div>

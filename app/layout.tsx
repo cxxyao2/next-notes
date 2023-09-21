@@ -36,11 +36,11 @@ export default function RootLayout({
 								<SideBar />
 								<div className='relative flex flex-col flex-1 '>
 									<NavBar />
-									<main className='mb-auto p-4 lg:p-6 overflow-x-hidden overflow-y-auto'>
+									<main className='mb-auto p-4 mt-[60px] lg:p-6   overflow-x-hidden overflow-y-auto'>
 										<section className='mx-auto max-w-3xl px-4 sm:px-6 xl:max-w-5xl xl:px-0'>
 											{children}
 										</section>
-									<Footer />
+										<Footer />
 									</main>
 									<Loader />
 									<ScrollToTop />

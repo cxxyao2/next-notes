@@ -40,21 +40,19 @@ const NavBar = () => {
 	if (!mounted) return null
 
 	return (
-		<header className='sticky top-0 z-20    border-b-2 border-gray-400/50  '>
+		<header className='fixed top-0 h-[60px] z-20  w-full  border-b-2 border-gray-400/50  '>
 			<nav>
 				<div className=' flex  flex-row justify-between items-center  p-4 lg:p-6 '>
-					<div className="flex flex-row">
+					<div className='flex flex-row'>
 						<Link href='/' className='flex space-x-2'>
 							<BsBook className='w-6 h-6 text-rose-600 dark:text-rose-100  mr-4'></BsBook>
-		</Link>
-							<Bars3Icon
-								className='w-6 h-6 text-gray-500 dark:text-gray-100 lg:hidden'
-								onClick={(e) =>
-								{
-									e.stopPropagation();
-									sidebarState.onOpen()
-								}}></Bars3Icon>
-
+						</Link>
+						<Bars3Icon
+							className='w-6 h-6 text-gray-500 dark:text-gray-100 lg:hidden'
+							onClick={(e) => {
+								e.stopPropagation()
+								sidebarState.onOpen()
+							}}></Bars3Icon>
 					</div>
 
 					<div className='flex justify-around items-center space-x-2 md:space-x-4'>

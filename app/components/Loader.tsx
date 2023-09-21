@@ -4,9 +4,9 @@ import { PuffLoader } from 'react-spinners'
 import useLoader from '../hooks/useLoader'
 
 const Loader = () => {
-	const { isOpen } = useLoader()
+	const { isLoading } = useLoader()
 
-	if (!isOpen) return null
+	if (!isLoading) return null
 	return (
 		<div
 			className='

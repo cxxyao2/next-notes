@@ -1,15 +1,15 @@
 import { create } from 'zustand'
 
 interface LoaderState {
-	isOpen: boolean
+	isLoading: boolean
 	onOpen: () => void
 	onClose: () => void
 }
 
 const useLoader = create<LoaderState>((set) => ({
-	isOpen: false,
-	onOpen: () => set(() => ({ isOpen: true })),
-	onClose: () => set(() => ({ isOpen: false }))
+	isLoading: false,
+	onOpen: () => set(() => ({ isLoading: true })),
+	onClose: () => set(() => ({ isLoading: false }))
 }))
 
 export default useLoader
