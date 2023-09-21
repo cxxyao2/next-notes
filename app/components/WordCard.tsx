@@ -7,8 +7,8 @@ type Props = { imageName: string }
 
 export default function WordCard({ imageName }: Props) {
 	return (
-		<div className='col-span-1 cursor-pointer group'>
-			<div className='flex flex-col gap-2 w-full shadow-sm'>
+		<div className='col-span-1 cursor-pointer'>
+			<div className='flex flex-col justify-start gap-2 w-full shadow-sm'>
 				<div
 					className='
             aspect-square
@@ -30,13 +30,13 @@ export default function WordCard({ imageName }: Props) {
 						alt='Listing'
 					/>
 				</div>
-			</div>
-			<div className='font-semibold text-lg'>Frenceh, Paris</div>
-			<div className='font-light text-neutral-500'>montaint</div>
-			<div className='flex flex-row items-center gap-1'>
-				<div className='font-semibold'>$ 2.22</div>
 
-				<div className='font-light'>night</div>
+				<div className='font-semibold text-lg'>Frenceh, Paris</div>
+				<div className='font-light text-neutral-500'>montaint</div>
+				<div className='flex flex-row items-center gap-1'>
+					<div className='font-semibold'>$ 2.22</div>
+					<div className='font-light'>night</div>
+				</div>
 			</div>
 		</div>
 	)

@@ -2,9 +2,9 @@ import getCurrentUser from './actions/getCurrentUser'
 import Confetti from './components/Confetti'
 import DailyTasks from './components/DailyTasks'
 import WordCard from './components/WordCard'
+import WordMemoryCard from './components/WordMemoryCard'
 
-export default async function Home()
-{
+export default async function Home() {
 	const currentUser = await getCurrentUser()
 
 	return (
@@ -12,11 +12,12 @@ export default async function Home()
 			<Confetti />
 			<div className='flex  flex-col items-center justify-between'>
 				<div className='mb-4 lg:max-w-5xl w-full '>
-					<DailyTasks currentUser={currentUser} />
+					 <DailyTasks currentUser={currentUser} />
+
 				</div>
 
 				<div className='mb-4 w-full   grid grid-col-1 gap-4 text-center md:mx-auto lg:max-w-5xl  lg:mb-0 md:grid-cols-2 lg:grid-cols-3 lg:text-left'>
-{/* need to make skeleton invisable conditionally */}
+					{/* need to make skeleton invisable conditionally */}
 					{/* {[1, 2, 3].map((item) => (
 						<WordCardSkeleton key={item} imageName='/images/a4.webp' />
 					))} */}

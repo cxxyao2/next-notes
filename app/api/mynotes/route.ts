@@ -1,22 +1,21 @@
 
 import db from '@/app/lib/prismadb'
 import { NextRequest, NextResponse } from 'next/server'
-import getCurrentUser from '@/app/actions/getCurrentUser'
 
 export async function GET(request: NextRequest) {
 	try {
-		const users = await db.mynote.findMany()
+		const notes = await db.mynote.findMany()
 
 		return NextResponse.json(
 			{
-				users,
-				message: 'User Get successfully'
+			notes,
+				message: 'Notes Get successfully'
 			},
 			{ status: 200 }
 		)
 	} catch (error) {
 		return NextResponse.json(
-			{ user: null, message: 'Something went wrong' },
+			{ notes: null, message: 'Something went wrong' },
 			{ status: 500 }
 		)
 	}
