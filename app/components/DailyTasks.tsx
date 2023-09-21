@@ -6,6 +6,7 @@ import axios from 'axios'
 
 import { useSession } from 'next-auth/react'
 import Image from 'next/image'
+import Link  from 'next/link'
 
 import { SafeUser } from '../types'
 import { CATEGORIES } from '../data/consts'
@@ -89,9 +90,13 @@ export default function DailyTasks({ currentUser }: DailyTasksProps) {
 					className='rounded-full border-2 border-gray-500 inline-block'
 					alt='avatar'
 				/>
-				<span className='ml-2 text-sm'>
-					{session?.user?.name || 'Please log in.'}
-				</span>
+				<div className='inline-block ml-2 text-sm'>
+					{session?.user ? (
+						<span>{session.user.name}</span>
+					) : (
+						<Link href='/login' className='text-blue-800 dark:text-blue-400 text-xl font-semibold underline underline-offset-8 decoration-slate-200 '>Please log in.</Link>
+					)}
+				</div>
 			</div>
 		</div>
 	)
