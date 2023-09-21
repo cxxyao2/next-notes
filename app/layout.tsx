@@ -6,7 +6,6 @@ import SideBar from './components/SideBar'
 import NavBar from './components/NavBar'
 import Footer from './components/Footer'
 import Loader from './components/Loader'
-import ScrollToTop from './components/ScrollToTop'
 
 import ClientSessionProvider from './components/ClientSessionProvider'
 import ThemeProvider from './components/ThemeProvider'
@@ -43,7 +42,6 @@ export default function RootLayout({
 										<Footer />
 									</main>
 									<Loader />
-									<ScrollToTop />
 								</div>
 							</div>
 						</ThemeProvider>
