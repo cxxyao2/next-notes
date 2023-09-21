@@ -34,7 +34,6 @@
 
 /*style the front side . fallback if image is missing*/
 .flipcardfront {
-	background-color: #bbb;
 	color: black;
 }
 
