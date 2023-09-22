@@ -4,6 +4,7 @@ import Select from 'react-select'
 import React, { useState } from 'react'
 import axios from 'axios'
 import DatePicker from 'react-datepicker'
+import {useRouter} from 'next/navigation'
 
 import { useForm, Controller, FieldValues } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -27,14 +28,16 @@ type Props = {
 
 export default function CreateNote({ allTags, currentUser }: Props) {
 	const { isLoading, onClose, onOpen } = useLoader()
+	const router = useRouter()
 
-	console.log('alltags', allTags)
+	
 
 	const {
 		control,
 		setValue,
 		watch,
-		formState: { errors }
+		formState: { errors },
+		reset
 	} = useForm<FieldValues>({
 		defaultValues: {
 			category: { label: 'word', value: 'word' },
@@ -108,6 +111,7 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 			})
 			onClose()
 			toast.success('Saved successfully')
+			reset()
 			console.log('Record created:', response.data)
 		} catch (error) {
 			onClose()
@@ -217,12 +221,15 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 					}}
 				/>
 			</div>
+			<div className='flex justify-between gap-4'>
+				<Button label='Cancel' type='button' outline disabled={isLoading} onClick={()=>router.push('/')} />
 			<Button
 				label='Post'
 				type='submit'
 				disabled={isLoading}
 				onClick={handleSubmit}
 			/>
+			</div>
 			{/* <button type='submit' onClick={handleSubmit}>
 				Submit
 			</button> */}

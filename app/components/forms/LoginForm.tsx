@@ -101,15 +101,16 @@ export default function RegisterForm() {
 					icon={AiFillGithub}
 					onClick={() => signIn('github', { callbackUrl: '/' })}
 				/>
-				<div className='text-center mt-4 font-light'>
+				<div className='text-center mt-4 font-light flex flex-col gap-2 md:flex-row'>
 					<p>
 						First time using Polyglot-Notes?
+
+					</p>
 						<Link
 							href='/register'
-							className='text-blue-500 cursor-pointer hover:underline'>
+							className=' text-blue-500 font-semibold text-xl cursor-pointer hover:underline'>
 							Create an account
 						</Link>
-					</p>
 				</div>
 			</div>
 		</form>

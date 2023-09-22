@@ -3,40 +3,34 @@
 import Image from 'next/image'
 import React from 'react'
 
-type Props = { imageName: string }
+type Props = { imgSrc:string, title:string,category:string }
 
-export default function WordCard({ imageName }: Props) {
+export default function WordCard({ imgSrc,title,category }: Props) {
 	return (
 		<div className='col-span-1 cursor-pointer'>
 			<div className='flex flex-col justify-start gap-2 w-full shadow-sm'>
 				<div
 					className='
-            aspect-square
-            w-full
             relative
             overflow-hidden
             rounded-xl
           '>
 					<Image
-						fill
 						className='
               object-cover
-              h-full
-              w-full
-              group-hover:scale-110
               transition
+							hover:scale-110
             '
-						src={imageName}
-						alt='Listing'
+						src={imgSrc}
+						width={300}
+						height={300}
+						alt='industry image'
 					/>
 				</div>
 
-				<div className='font-semibold text-lg'>Frenceh, Paris</div>
-				<div className='font-light text-neutral-500'>montaint</div>
-				<div className='flex flex-row items-center gap-1'>
-					<div className='font-semibold'>$ 2.22</div>
-					<div className='font-light'>night</div>
-				</div>
+				<div className='font-semibold text-lg'>{title}</div>
+				<div className='font-light text-neutral-500'>{category}</div>
+
 			</div>
 		</div>
 	)

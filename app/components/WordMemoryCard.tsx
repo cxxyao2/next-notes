@@ -8,6 +8,8 @@ import { SafeNote } from '../types'
 type Props = { word: SafeNote; frontColor: string; onClick: () => void }
 
 export default function WordMemoryCard({ word, frontColor, onClick }: Props) {
+	if (!word || word.memoized) return null
+	
 	return (
 		<div className={styles.flipcard}>
 			<div className={styles.flipcardinner}>

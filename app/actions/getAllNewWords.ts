@@ -23,7 +23,7 @@ export default async function getAllNewWords() {
 
 		// todo: if datetime need to be converted into string or not
 		return {
-			notes: notes.map((note) => ({
+			words: notes.map((note) => ({
 				...note,
 				occurredAt: note.occurredAt.toISOString(),
 				createdAt: note.createdAt.toISOString(),

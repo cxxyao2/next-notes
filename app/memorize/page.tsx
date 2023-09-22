@@ -10,7 +10,7 @@ export default async function Page()
 
   return (
     <ClientOnly>
-      <MemoizeGrid newWords={ data?.notes} />
+      <MemoizeGrid newWords={ data?.words} />
     </ClientOnly>
   )
 }

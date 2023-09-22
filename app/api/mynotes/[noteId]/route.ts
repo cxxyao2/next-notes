@@ -3,6 +3,7 @@ import { NextRequest, NextResponse } from 'next/server'
 
 import getCurrentUser from '@/app/actions/getCurrentUser'
 import prisma from '@/app/lib/prismadb'
+import { Mynote } from '@prisma/client'
 
 interface IParams {
 	noteId?: string
@@ -18,13 +19,11 @@ export async function DELETE(
 		if (!currentUser) return NextResponse.error()
 
 		const { noteId } = params
-		if (!noteId ) throw new Error('Invalid ID')
-
-
+		if (!noteId) throw new Error('Invalid ID')
 
 		const currentNote = await prisma.mynote.findUnique({
 			where: {
-				id:noteId,
+				id: noteId,
 				userId: currentUser?.id
 			}
 		})
@@ -54,7 +53,16 @@ export async function PUT(request: Request, { params }: { params: IParams }) {
 	try {
 		const { noteId } = params
 		const body = await request.json()
-		const { language, category, content, occurredAt, tags } = body
+		const {
+			language,
+			category,
+			keywords,
+			content,
+			occurredAt,
+			tags,
+			memoized,
+			viewCounter
+		} = body
 
 		if (!noteId) throw new Error('Invalid ID')
 
@@ -63,11 +71,9 @@ export async function PUT(request: Request, { params }: { params: IParams }) {
 			throw new Error('Invalid user')
 		}
 
-
-
 		const currentNote = await prisma.mynote.findUnique({
 			where: {
-				id:noteId,
+				id: noteId,
 				userId: currentUser?.id
 			}
 		})
@@ -76,17 +82,31 @@ export async function PUT(request: Request, { params }: { params: IParams }) {
 			return NextResponse.error()
 		}
 
+		const updatedBody: Partial<Mynote> = {
+			language,
+			category,
+			keywords,
+			content,
+			viewCounter,
+			memoized,
+			occurredAt,
+			tags
+		}
+		const keyValuePairs = Object.entries(updatedBody)
+		const nonNullFields: Record<string, any> = {}
+
+		for (const [key, value] of keyValuePairs) {
+			if (value !== null && value !== undefined) {
+				nonNullFields[key] = value
+			}
+			console.log(`Key: ${key}, Value: ${value}`)
+		}
+
 		const newNote = await prisma?.mynote.update({
 			where: {
-				id:noteId
+				id: noteId
 			},
-			data: {
-				language,
-				category,
-				content,
-				occurredAt,
-				tags
-			}
+			data: { ...nonNullFields }
 		})
 
 		return NextResponse.json(newNote)
