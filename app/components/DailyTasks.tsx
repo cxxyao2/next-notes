@@ -90,21 +90,18 @@ export default function DailyTasks({ currentUser }: DailyTasksProps) {
 						<div className='inline-block'>
 							<span className='mr-6'>{session.user.name}</span>
 							<Link
-								href='/memorize'
+								href={`/memorize/${encodeURIComponent(session.user.email)}`}
 								className='group rounded-lg border border-transparent px-5 py-4   '>
 								<h3
 									className={`inline-block mb-3 text-xl font-semibold hover:underline hover:underline-offset-4 hover:decoration-blue-800  dark:hover:decoration-blue-400`}>
-									Start
-									<span className='inline-block transition-transform group-hover:translate-x-1 motion-reduce:transform-none'>
-										-&gt;
-									</span>
+									Start Here!
 								</h3>
 							</Link>
 						</div>
 					) : (
 						<Link
 							href='/login'
-							className='text-blue-800 dark:text-blue-400 text-xl font-semibold underline underline-offset-8 decoration-slate-200 '>
+							className='text-blue-800 dark:text-blue-400 text-xl font-semibold underline underline-offset-4 decoration-slate-200 '>
 							Please log in.
 						</Link>
 					)}

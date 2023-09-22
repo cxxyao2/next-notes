@@ -25,6 +25,6 @@ export default async function getAllTags() {
 			tags
 		}
 	} catch (error: any) {
-		return null
+		throw new Error(error)
 	}
 }

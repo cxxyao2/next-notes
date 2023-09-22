@@ -38,7 +38,7 @@ export default function Input({
 				aria-invalid={errors[id] ? 'true' : 'false'}
 				{...register(id, { required })}
 				className={`w-full p-4 border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed pl-4  ${
-					errors[id] ? 'border-rose-500' : 'border-neutral-400'
+					errors[id] ? 'border-rose-500' : 'border-gray-400'
 				}   ${errors[id] ? 'focus:border-rose-500' : 'focus:border-black'} `}
 			/>
 			<label

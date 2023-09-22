@@ -9,6 +9,7 @@ import Loader from './components/Loader'
 
 import ClientSessionProvider from './components/ClientSessionProvider'
 import ThemeProvider from './components/ThemeProvider'
+import ToasterProvider from '@/app/providers/ToasterProvider';
 import ClientOnly from './components/ClientOnly'
 import 'react-datepicker/dist/react-datepicker.css'
 
@@ -29,8 +30,10 @@ export default function RootLayout({
 			<body
 				className={`${inter.className} bg-white text-black antialiased dark:bg-gray-950 dark:text-white `}>
 				<ClientOnly>
+
 					<ClientSessionProvider>
 						<ThemeProvider>
+							<ToasterProvider />
 							<div className='flex h-screen  relative overflow-hidden'>
 								<SideBar />
 								<div className='relative flex flex-col flex-1 '>
@@ -46,6 +49,7 @@ export default function RootLayout({
 							</div>
 						</ThemeProvider>
 					</ClientSessionProvider>
+
 				</ClientOnly>
 			</body>
 		</html>

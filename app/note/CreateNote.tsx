@@ -4,7 +4,7 @@ import Select from 'react-select'
 import React, { useState } from 'react'
 import axios from 'axios'
 import DatePicker from 'react-datepicker'
-import {useRouter} from 'next/navigation'
+import { useRouter } from 'next/navigation'
 
 import { useForm, Controller, FieldValues } from 'react-hook-form'
 import { toast } from 'react-hot-toast'
@@ -29,8 +29,6 @@ type Props = {
 export default function CreateNote({ allTags, currentUser }: Props) {
 	const { isLoading, onClose, onOpen } = useLoader()
 	const router = useRouter()
-
-	
 
 	const {
 		control,
@@ -222,13 +220,19 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 				/>
 			</div>
 			<div className='flex justify-between gap-4'>
-				<Button label='Cancel' type='button' outline disabled={isLoading} onClick={()=>router.push('/')} />
-			<Button
-				label='Post'
-				type='submit'
-				disabled={isLoading}
-				onClick={handleSubmit}
-			/>
+				<Button
+					label='Cancel'
+					type='button'
+					outline
+					disabled={isLoading}
+					onClick={() => router.push('/')}
+				/>
+				<Button
+					label='Post'
+					type='submit'
+					disabled={isLoading}
+					onClick={handleSubmit}
+				/>
 			</div>
 			{/* <button type='submit' onClick={handleSubmit}>
 				Submit

@@ -32,7 +32,7 @@ export default function InputNoHook({
 				required={required}
 				value={value}
 				onChange={onChange}
-				className='w-full p-4 border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed pl-4 border-neutral-400 focus:border-black'
+				className='w-full p-4 border-2 rounded-md transition disabled:opacity-70 disabled:cursor-not-allowed pl-4 border-gray-400 focus:border-black'
 			/>
 			<label
 				htmlFor={id}

@@ -99,7 +99,6 @@ export async function PUT(request: Request, { params }: { params: IParams }) {
 			if (value !== null && value !== undefined) {
 				nonNullFields[key] = value
 			}
-			console.log(`Key: ${key}, Value: ${value}`)
 		}
 
 		const newNote = await prisma?.mynote.update({
