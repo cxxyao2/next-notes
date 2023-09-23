@@ -6,7 +6,12 @@ import axios from 'axios'
 import DatePicker from 'react-datepicker'
 import { useRouter } from 'next/navigation'
 
-import { useForm, Controller, FieldValues } from 'react-hook-form'
+import {
+	useForm,
+	Controller,
+	FieldValues,
+	SubmitHandler
+} from 'react-hook-form'
 import { toast } from 'react-hot-toast'
 import MDEditor from '@uiw/react-md-editor'
 import rehypeSanitize from 'rehype-sanitize'
@@ -20,6 +25,13 @@ import { SafeUser } from '../types'
 
 import useLoader from '../hooks/useLoader'
 import { CATEGORIES } from '../data/consts'
+import { z } from 'zod'
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const schema = z.object({
+	keywords: z.string().min(3, 'Keywords must be at least 3 character').max(100),
+	content: z.string().min(8, 'Content must be at least 8 characters')
+})
 
 type Props = {
 	allTags: Tag[] | undefined | null
@@ -35,7 +47,8 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 		setValue,
 		watch,
 		formState: { errors },
-		reset
+		reset,
+		handleSubmit
 	} = useForm<FieldValues>({
 		defaultValues: {
 			category: { label: 'word', value: 'word' },
@@ -44,7 +57,8 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 			language: 'en',
 			tags: [],
 			occurredAt: new Date()
-		}
+		},
+		resolver: zodResolver(schema)
 	})
 
 	const keywords = watch('keywords')
@@ -88,14 +102,12 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 				occurredAt,
 				userId: currentUser?.id
 			})
-			console.log('Record update:', response.data)
 		} catch (error) {
 			console.error('Error updating a new record:', error)
 		}
 	}
 
-	const handleSubmit = async (e: React.MouseEvent<HTMLButtonElement>) => {
-		e.preventDefault()
+	const onSubmit: SubmitHandler<FieldValues> = async (data: any) => {
 		onOpen()
 		try {
 			const response = await axios.post('/api/mynotes', {
@@ -110,18 +122,16 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 			onClose()
 			toast.success('Saved successfully')
 			reset()
-			console.log('Record created:', response.data)
 		} catch (error) {
 			onClose()
 			toast.error('Failed' + JSON.stringify(error))
-			console.error('Error creating a new record:', error)
 		}
 	}
 
 	if (!allTags || allTags.length === 0) return null
 
 	return (
-		<div className='flex flex-col gap-4'>
+		<form className='flex flex-col gap-4' onSubmit={handleSubmit(onSubmit)}>
 			<label className='text-2xl font-semibold text-blue-600 dark:text-blue-200'>
 				Craft your note
 			</label>
@@ -205,11 +215,17 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 				}
 				required
 			/>
+			{errors.keywords && (
+				<p className='text-rose-600'>{errors.keywords.message?.toString()}</p>
+			)}
 
 			<div className='flex flex-col'>
 				<label htmlFor='content' className='text-md mb-6 font-semibold'>
 					Content:
 				</label>
+				{errors.content && (
+					<p className='text-rose-600'>{errors.content.message?.toString()}</p>
+				)}
 				<MDEditor
 					value={content}
 					onChange={(value) => setCustomValue('content', value)}
@@ -227,12 +243,7 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 					disabled={isLoading}
 					onClick={() => router.push('/')}
 				/>
-				<Button
-					label='Post'
-					type='submit'
-					disabled={isLoading}
-					onClick={handleSubmit}
-				/>
+				<Button label='Post' type='submit' disabled={isLoading} />
 			</div>
 			{/* <button type='submit' onClick={handleSubmit}>
 				Submit
@@ -243,6 +254,6 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 			<button type='button' onClick={handleUpdate}>
 				update 2
 			</button> */}
-		</div>
+		</form>
 	)
 }

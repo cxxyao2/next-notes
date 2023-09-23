@@ -2,7 +2,8 @@
 
 import React, { useState, useEffect } from 'react'
 import { TOPICPLACEHOLDERS } from '../data/consts'
-import { GrView } from 'react-icons/gr'
+import { BsFillEyeFill } from 'react-icons/bs'
+
 
 type Props = {}
 
@@ -29,8 +30,14 @@ export default function HomeExcerptList({}: Props) {
 							-&gt;
 						</span>
 					</h2>
-					<p className={`m-0 max-w-[30ch] text-sm`}>{item.author} <span className='ml-6 opacity-80'>{item.date}</span></p>
-					<div className='flex mt-4 '><GrView className='w-5 h-5  mr-4' />{item.viewCount}</div>
+					<p className={`m-0 max-w-[30ch] text-sm`}>
+						{item.author} <span className='ml-6 opacity-80'>{item.date}</span>
+					</p>
+					<div className='flex mt-4 '>
+						{' '}
+						<BsFillEyeFill className='w-6 h-6 text-gray-600 dark:text-gray-100  mr-4'></BsFillEyeFill>
+						{item.viewCount}
+					</div>
 				</a>
 			))}
 		</div>
