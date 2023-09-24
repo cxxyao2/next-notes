@@ -3,6 +3,7 @@
 import Image from 'next/image'
 import React from 'react'
 import { SafeNote } from '../types'
+import Link from 'next/link'
 
 type Props = {
 	archive: SafeNote
@@ -13,7 +14,13 @@ export default function ArchiveArticle({ archive, imageSrc }: Props) {
 	return (
 		<div className='w-full pb-2 border-b-2 border-neutral-200  flex  flex-col-reverse  lg:flex-row-reverse justify-between'>
 			<div className='flex-1 p-4'>
-				<div className='text-lg font-semibold'>{archive.keywords}</div>
+				<div className='text-lg  font-semibold'>
+					<Link
+						className='text-rose-600 dark:text-rose-200 hover:underline hover:under-rose-600 dark:hover:underline-rose-200 '
+						href={`/note/${archive.id}`}>
+						{archive.keywords}
+					</Link>
+				</div>
 				<div className='text-sm'>
 					By Amily Paro{' '}
 					<span>{new Date(archive.occurredAt).toLocaleDateString()}</span>
