@@ -3,14 +3,22 @@
 import React, { useEffect, useState } from 'react'
 import ArchiveArticles from '../components/ArchiveArticles'
 import ArchiveTable from '../components/ArchiveTable'
-import { type } from './../types/index';
 
-const ArchiveTabPanel: React.FC = () => {
+import useArticles from './../hooks/useArticles';
+import { SafeNote } from '../types';
+
+interface ArchiveTabPanelProps {
+	myArticles: SafeNote[] | undefined | null
+}
+
+const ArchiveTabPanel= ({ myArticles }: ArchiveTabPanelProps) => {
 	const [activeTab, setActiveTab] = useState(0)
 	const [mounted, setMounted] = useState(false)
+	const articles = useArticles()
 
 	useEffect(() => {
 		setMounted(true)
+		articles.setArticles(myArticles|| [])
 	}, [])
 
 	const handleTabClick = (index: number) => {

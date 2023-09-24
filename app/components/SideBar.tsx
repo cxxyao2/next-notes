@@ -54,7 +54,6 @@ const SideBar = () => {
 
 	if (!mounted) return null
 
-	console.log('sidebarState', sidebarState)
 
 	return (
 		<div >

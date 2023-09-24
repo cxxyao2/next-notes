@@ -1,24 +1,38 @@
 'use client'
 
-import Image from 'next/image'
-import React from 'react'
+import React, { useEffect } from 'react'
 import ArchiveArticle from './ArchiveArticle'
+
+import useArticles from '../hooks/useArticles'
 
 type Props = {}
 
 export default function ArchiveArticles({}: Props) {
-	const imageSrcs = [
-		'/images/a3.webp',
-		'/images/a4.webp',
-		'/images/a5.jpg',
-		'/images/a6.jpg'
-	]
+		const imageSrcs = [
+			'/images/a3.webp',
+			'/images/a4.webp',
+			'/images/a5.jpg',
+			'/images/a6.jpg'
+		]
+
+	const articlesHook = useArticles()
+	const myarticles = articlesHook.articles
+
+	useEffect(() =>
+	{
+// client data fetch is ok. new record is included in return data.
+		fetch('/api/mynotes', { cache: 'no-store' }).then(res => res.json()).then(data =>
+		{
+			console.log('new articles,',data)
+		})
+	},[])
+
 	return (
 		<>
 			<div>ArchiveArticles</div>
 			<div className='flex flex-col justify-start'>
-				{imageSrcs.map((imageSrc, index) => (
-					<ArchiveArticle key={index} imageSrc={imageSrc} />
+				{myarticles.map((archive, index) => (
+					<ArchiveArticle key={index} archive={archive} imageSrc={imageSrcs[index % 4]} />
 				))}
 			</div>
 		</>

@@ -54,7 +54,6 @@ export default function RegisterForm() {
 	})
 
 	const onSubmit: SubmitHandler<FieldValues> = (data: any) => {
-		console.log(data)
 
 		setIsLoading(true)
 
@@ -69,7 +68,6 @@ export default function RegisterForm() {
 				toast.success('Registered successfully')
 				setIsLoading(false)
 				router.push('/login')
-				console.log(res)
 			})
 			.catch((error) => {
 				toast.error(error)

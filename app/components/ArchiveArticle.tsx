@@ -2,20 +2,28 @@
 
 import Image from 'next/image'
 import React from 'react'
+import { SafeNote } from '../types'
 
 type Props = {
+	archive: SafeNote
 	imageSrc: string
 }
 
-export default function ArchiveArticle({ imageSrc }: Props) {
+export default function ArchiveArticle({ archive, imageSrc }: Props) {
 	return (
 		<div className='w-full pb-2 border-b-2 border-neutral-200  flex  flex-col-reverse  lg:flex-row-reverse justify-between'>
 			<div className='flex-1 p-4'>
-				<div className='text-lg font-semibold'>Climate changes</div>
+				<div className='text-lg font-semibold'>{archive.keywords}</div>
 				<div className='text-sm'>
-					By Amily Paro <span>Feb.15, 2023</span>
+					By Amily Paro{' '}
+					<span>{new Date(archive.occurredAt).toLocaleDateString()}</span>
 				</div>
-				<div className='mt-6'>A third of the world’s people do not get early warnings of extreme weather. The UN action plan aims to have everyone covered by 2027.</div>
+				<div
+					className='mt-6 first-line:uppercase first-line:tracking-widest
+    first-letter:text-2xl first-letter:font-bold first-letter:text-slate-900 dark:first-letter:text-slate-200
+  first-letter:mr-3 first-letter:float-left '>
+					{archive.content.substring(0, 100)}
+				</div>
 			</div>
 			<div className='p-4'>
 				<div className='relative'>
@@ -27,7 +35,9 @@ export default function ArchiveArticle({ imageSrc }: Props) {
 						className=' w-full lg:w-36 lg:h-36 object-cover rounded-md'
 					/>
 				</div>
-				<span className='inline-block bg-neutral-200 p-1 m-1 rounded-lg text-center'>Finance</span>
+				<span className='inline-block bg-neutral-200 dark:bg-neutral-800 p-1 m-1 rounded-lg text-center'>
+					Finance
+				</span>
 			</div>
 		</div>
 	)

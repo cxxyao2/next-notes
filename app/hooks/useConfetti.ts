@@ -1,12 +1,12 @@
 import { create } from 'zustand'
 
-interface useConfetti {
+interface ConfettiState {
 	isOpen: boolean
 	onOpen: () => void
 	onClose: () => void
 }
 
-const useConfetti = create<useConfetti>((set) => ({
+const useConfetti = create<ConfettiState>((set) => ({
 	isOpen: false,
 	onOpen: () => set(() => ({ isOpen: true })),
 	onClose: () => set(() => ({ isOpen: false }))

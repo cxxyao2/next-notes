@@ -28,7 +28,7 @@ export default function SearchResult({}: Props) {
 			</h1>
 			<div className='relative my-4  mb-6 max-w-full w-5/6 dark:bg-neutral-600'>
 				<div className='flex border-2 border-gray-300 rounded-md overflow-hidden shadow justify-center'>
-					<div className="flex-1 flex items-center p-2  ">
+					<div className='flex-1 flex items-center p-2  '>
 						<svg
 							xmlns='http://www.w3.org/2000/svg'
 							fill='none'
@@ -50,7 +50,7 @@ export default function SearchResult({}: Props) {
 							type='text'
 							id='keywords'
 							className='w-full min-w-0 pl-11 outline-none dark:bg-neutral-600'
-							placeholder='enter keywords...'
+							placeholder='enter search criteria...'
 							autoComplete='off'
 							spellCheck='false'
 						/>

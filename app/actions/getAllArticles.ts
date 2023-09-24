@@ -1,7 +1,9 @@
 import prisma from '@/app/lib/prismadb'
 import getCurrentUser from './getCurrentUser'
 
-export default async function getAllNewWords() {
+export const dynamic='force-dynamic'
+
+export default async function getAllArticles() {
 	try {
 		const user = await getCurrentUser()
 
@@ -11,19 +13,22 @@ export default async function getAllNewWords() {
 
 		const notes = await prisma.mynote.findMany({
 			where: {
-				category:'word',
-				userId: user.id,
-				memoized:false
+        category: { not: 'word' },
+				userId: user.id
+			},
+			orderBy:{
+				occurredAt:'desc'
 			}
+
 		})
 
 		if (!notes) {
 			return null
 		}
 
-	
+
 		return {
-			words: notes.map((note) => ({
+			articles: notes.map((note) => ({
 				...note,
 				occurredAt: note.occurredAt.toISOString(),
 				createdAt: note.createdAt.toISOString(),

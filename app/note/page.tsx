@@ -1,3 +1,4 @@
+import { redirect } from 'next/navigation'
 import getAllTags from '../actions/getAllTags'
 import getCurrentUser from '../actions/getCurrentUser'
 import ClientOnly from '../components/ClientOnly'
@@ -7,11 +8,14 @@ export default async function Page() {
 	const data = await getAllTags()
 	const currentUser = await getCurrentUser()
 
+	if (!currentUser) {
+		redirect('/login')
 
+	}
 
 	return (
 		<ClientOnly>
-			<CreateNote allTags={data?.tags} currentUser={currentUser}/>
+			<CreateNote allTags={data?.tags} currentUser={currentUser} />
 		</ClientOnly>
 	)
 }

@@ -49,7 +49,7 @@ export async function POST(request: NextRequest) {
 		)
 	} catch (error)
 	{
-		console.log('error note server',error)
+		console.error('error note server',error)
 		return NextResponse.json(
 			{ note: null, message: 'Something went wrong' },
 			{ status: 500 }

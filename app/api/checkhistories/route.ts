@@ -7,7 +7,6 @@ import { Role } from '@prisma/client'
 export async function GET(request: NextRequest)
 {
 	// todo: if user role is admin, return all check histories
-	// else return only user's check histories
 
 	try
 	{

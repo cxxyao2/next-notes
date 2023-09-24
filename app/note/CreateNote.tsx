@@ -29,9 +29,10 @@ import { z } from 'zod'
 import { zodResolver } from '@hookform/resolvers/zod'
 
 const schema = z.object({
+	occurredAt:z.date().min(new Date("1900-01-01"), { message: "Too old" }),
 	keywords: z.string().min(3, 'Keywords must be at least 3 character').max(100),
 	content: z.string().min(8, 'Content must be at least 8 characters')
-})
+}).required()
 
 type Props = {
 	allTags: Tag[] | undefined | null
@@ -82,7 +83,6 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 		try {
 			const deletedId = 1
 			const response = await axios.delete(`/api/mynotes/${deletedId}`)
-			console.log('Record deleted:', response.data)
 		} catch (error) {
 			console.error('Error deleting a new record:', error)
 		}
@@ -194,6 +194,11 @@ export default function CreateNote({ allTags, currentUser }: Props) {
 
 			<div className='flex flex-col my-6  p-2'>
 				<p className='text-md font-semibold mb-4'>Occurred At:</p>
+				{errors.occurredAt && (
+					<p className='text-rose-600'>
+						{errors.occurredAt.message?.toString()}
+					</p>
+				)}
 				<DatePicker
 					className='border-2 border-neutral-600 dark:border-neutral-200 rounded-lg p-2 pr-6'
 					selected={occurredAt}

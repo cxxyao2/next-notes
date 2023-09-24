@@ -28,7 +28,7 @@ export async function DELETE(
 			}
 		})
 
-		console.log('currentNote', currentNote)
+
 
 		const deletedNote = await prisma.mynote.deleteMany({
 			where: {
@@ -41,7 +41,7 @@ export async function DELETE(
 			message: 'Note deleted successfully'
 		})
 	} catch (error) {
-		console.log('error is ', error)
+		console.error('error is ', error)
 		return NextResponse.json(
 			{ deletedNote: null, message: 'Something went wrong' },
 			{ status: 500 }
@@ -110,7 +110,7 @@ export async function PUT(request: Request, { params }: { params: IParams }) {
 
 		return NextResponse.json(newNote)
 	} catch (error) {
-		console.log('error is ', error)
+		console.error('error is ', error)
 		return NextResponse.json(
 			{ deletedNote: null, message: 'Something went wrong' },
 			{ status: 500 }
