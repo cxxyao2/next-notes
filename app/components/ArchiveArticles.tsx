@@ -29,7 +29,7 @@ export default function ArchiveArticles({}: Props) {
 
 	return (
 		<>
-			<div>ArchiveArticles</div>
+			
 			<div className='flex flex-col justify-start'>
 				{myarticles.map((archive, index) => (
 					<ArchiveArticle key={index} archive={archive} imageSrc={imageSrcs[index % 4]} />

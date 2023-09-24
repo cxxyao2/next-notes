@@ -47,7 +47,7 @@ export default function DailyTasks({ currentUser }: DailyTasksProps) {
 			confetti.onOpen()
 			setTimeOutId = setTimeout(() => {
 				confetti.onClose()
-			}, 3000)
+			}, 10000)
 		} catch (error) {
 			console.error('error is', error)
 		}
