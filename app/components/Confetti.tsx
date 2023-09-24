@@ -15,9 +15,10 @@ export default function MyConfetti() {
 
 	const { width, height } = useWindowSize()
 
-
 	if (!hasMounted || !confetti.isOpen) return null
-	return  <div className='fixed top-0 left-0  z-[100]'>
-		<Confetti width={width} height={height} />
+	return (
+		<div className='fixed top-0 left-0  z-[100]'>
+			<Confetti width={width} height={height} />
 		</div>
+	)
 }
