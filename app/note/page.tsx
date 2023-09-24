@@ -4,13 +4,14 @@ import getCurrentUser from '../actions/getCurrentUser'
 import ClientOnly from '../components/ClientOnly'
 import CreateNote from './CreateNote'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Page() {
 	const data = await getAllTags()
 	const currentUser = await getCurrentUser()
 
 	if (!currentUser) {
 		redirect('/login')
-
 	}
 
 	return (

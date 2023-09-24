@@ -6,6 +6,8 @@ import HomeWordList from './components/HomeWordList'
 import WordMemoryCard from './components/WordMemoryCard'
 import HomeExcerptList from './components/HomeExcerptList'
 
+export const dynamic = 'force-dynamic'
+
 export default async function Home() {
 	const currentUser = await getCurrentUser()
 
