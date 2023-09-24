@@ -33,6 +33,7 @@ export default function ArchiveArticle({ archive, imageSrc }: Props) {
 						height='300'
 						alt='picture of diary'
 						className=' w-full lg:w-36 lg:h-36 object-cover rounded-md'
+						priority
 					/>
 				</div>
 				<span className='inline-block bg-neutral-200 dark:bg-neutral-800 p-1 m-1 rounded-lg text-center'>
