@@ -19,7 +19,7 @@ export default function ArchiveArticle({ archive, imageSrc }: Props) {
 					<span>{new Date(archive.occurredAt).toLocaleDateString()}</span>
 				</div>
 				<div
-					className='mt-6 first-line:uppercase first-line:tracking-widest
+					className='mt-6
     first-letter:text-2xl first-letter:font-bold first-letter:text-slate-900 dark:first-letter:text-slate-200
   first-letter:mr-3 first-letter:float-left '>
 					{archive.content.substring(0, 100)}
