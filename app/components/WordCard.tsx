@@ -25,6 +25,7 @@ export default function WordCard({ imgSrc,title,category }: Props) {
 						width={300}
 						height={300}
 						alt='industry image'
+						priority
 					/>
 				</div>
 
