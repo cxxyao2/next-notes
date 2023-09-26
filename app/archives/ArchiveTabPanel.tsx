@@ -18,7 +18,7 @@ const ArchiveTabPanel= ({ myArticles }: ArchiveTabPanelProps) => {
 
 	useEffect(() => {
 		setMounted(true)
-		articles.setArticles(myArticles|| [])
+		articles.setArticles(myArticles || [])
 	}, [])
 
 	const handleTabClick = (index: number) => {
@@ -32,7 +32,7 @@ const ArchiveTabPanel= ({ myArticles }: ArchiveTabPanelProps) => {
 			<div role='tablist' className='flex justify-center space-x-4 p-2'>
 				<button
 					type='button'
-					className='inline-block px-4 py-2 border-2  rounded-lg focus:outline focus:outline-rose-500  hover:bg-neutral-200 dark:hover:bg-neutral-700'
+					className={`inline-block px-4 py-2 border-2  rounded-lg   hover:bg-neutral-200 dark:hover:bg-neutral-700 ${activeTab === 0 ?'outline outline-rose-500':''} `}
 					role='tab'
 					aria-selected={activeTab === 0}
 					onClick={() => handleTabClick(0)}
@@ -41,7 +41,7 @@ const ArchiveTabPanel= ({ myArticles }: ArchiveTabPanelProps) => {
 				</button>
 				<button
 					type='button'
-					className='inline-block px-4 py-2 border-2  rounded-lg focus:outline focus:outline-rose-500  hover:bg-neutral-200 dark:hover:bg-neutral-700 '
+									className={`inline-block px-4 py-2 border-2  rounded-lg   hover:bg-neutral-200 dark:hover:bg-neutral-700 ${activeTab === 1?' outline outline-rose-500':''}`}
 					role='tab'
 					aria-selected={activeTab === 1}
 					onClick={() => handleTabClick(1)}

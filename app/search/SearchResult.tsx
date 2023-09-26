@@ -1,28 +1,55 @@
 'use client'
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, useRef } from 'react'
+import { SafeNote } from '../types'
+import ArchiveArticle from '../components/ArchiveArticle'
 
 type Props = {}
 
-export default function SearchResult({}: Props) {
-	const [mounted, setMounted] = useState(false)
+		const imageSrcs = [
+			'/images/a3.webp',
+			'/images/a4.webp',
+			'/images/a5.jpg',
+			'/images/a6.jpg'
+]
 
-	useEffect(() => {
+
+export default function SearchResult({ }: Props)
+{
+	const [mounted, setMounted] = useState(false)
+	const inputRef = useRef<HTMLInputElement>(null)
+	const [notes,setNotes] = useState<SafeNote[]>([])
+
+
+	useEffect(() =>
+	{
 		setMounted(true)
 	}, [])
 
 	if (!mounted) return null
-	const handleSubmit = () => {
-		// todo
-		// axios.post('/api/search', {
-		// 	keywords: keywords
-		// })
+	const handleSubmit = (e:React.FormEvent<HTMLFormElement>) =>
+	{
+		e.preventDefault()
+		const keywords = inputRef.current?.value
+		if (!keywords) return
+		axios.get(`/api/mynotes?keywords=${keywords}`)
+			.then((response) =>
+			{
+				console.log('found data is', response?.data?.notes)
+				setNotes(response?.data?.notes||[])
+			})
+			.catch((error) =>
+			{
+				console.error(error)
+			})
+
 	}
 
 	return (
+		<>
 		<form
 			className='flex flex-col items-center justify-center w-full'
-			onSubmit={handleSubmit}>
+			onSubmit={(e) => handleSubmit(e)} >
 			<h1 className='font-extrabold text-4xl max-w-full my-8'>
 				Search your favorite notes:
 			</h1>
@@ -48,7 +75,7 @@ export default function SearchResult({}: Props) {
 						</label>
 						<input
 							type='text'
-							id='keywords'
+							id='keywords' ref={inputRef}
 							className='w-full min-w-0 pl-11 outline-none dark:bg-neutral-600'
 							placeholder='enter search criteria...'
 							autoComplete='off'
@@ -65,5 +92,15 @@ export default function SearchResult({}: Props) {
 				</div>
 			</div>
 		</form>
+		<hr className='my-4' />
+
+		{notes && notes.length>0? <div className='grid grid-cols-1'>
+				{notes.map((archive, index) => (
+					<ArchiveArticle key={index} archive={archive} imageSrc={imageSrcs[index % 4]} />
+				))}
+			</div>:<div>No data found.</div>}
+		</>
+
+
 	)
 }
