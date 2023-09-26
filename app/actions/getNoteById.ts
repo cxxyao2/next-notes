@@ -1,5 +1,4 @@
 import prisma from '@/app/lib/prismadb'
-import { to } from './../../.next/static/chunks/main-app'
 
 interface IParams {
 	noteId?: string

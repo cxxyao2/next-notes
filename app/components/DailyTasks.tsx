@@ -29,7 +29,7 @@ export default function DailyTasks({ currentUser }: DailyTasksProps) {
 		return () => {
 			clearTimeout(setTimeOutId)
 		}
-	}, [])
+	}, [setTimeOutId])
 
 	const handleCheckboxChange = async (
 		e: React.ChangeEvent<HTMLInputElement>
