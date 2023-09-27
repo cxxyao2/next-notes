@@ -19,7 +19,7 @@ const ArchiveTabPanel= ({ myArticles }: ArchiveTabPanelProps) => {
 	useEffect(() => {
 		setMounted(true)
 		articles.setArticles(myArticles || [])
-	}, [])
+	}, [articles, myArticles])
 
 	const handleTabClick = (index: number) => {
 		setActiveTab(index)
