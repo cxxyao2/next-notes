@@ -18,3 +18,10 @@
 }
 
 
+
+
+@layer components {
+  a.active {
+    @apply  underline decoration-2 underline-offset-4  decoration-blue-400;
+  }
+}

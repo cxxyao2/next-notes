@@ -1,7 +1,7 @@
 'use client'
 
 import axios from 'axios'
-import { useRouter } from 'next/navigation'
+import { useRouter, useSearchParams } from 'next/navigation'
 
 import { useState } from 'react'
 import { toast } from 'react-hot-toast'
@@ -28,8 +28,10 @@ const schema = z.object({
 		.min(8, 'Password must be at least 8 characters')
 })
 
-export default function RegisterForm() {
+export default function LoginForm() {
 	const router = useRouter()
+	const searchParams = useSearchParams()
+
 	const [isLoading, setIsLoading] = useState(false)
 
 	const {
@@ -52,7 +54,8 @@ export default function RegisterForm() {
 				setIsLoading(false)
 				if (callback?.ok) {
 					toast.success('Logged in successfully')
-					router.push('/')
+					const redirectUrl = searchParams.get('redirectUrl') || '/'
+					router.push(redirectUrl)
 				}
 
 				if (callback?.error) {
@@ -102,15 +105,12 @@ export default function RegisterForm() {
 					onClick={() => signIn('github', { callbackUrl: '/' })}
 				/>
 				<div className='text-center mt-4 font-light flex flex-col gap-2 md:flex-row'>
-					<p>
-						First time using Polyglot-Notes?
-
-					</p>
-						<Link
-							href='/register'
-							className=' text-blue-500 font-semibold text-xl cursor-pointer hover:underline'>
-							Create an account
-						</Link>
+					<p>First time using Polyglot-Notes?</p>
+					<Link
+						href='/register'
+						className=' text-blue-500 font-semibold text-xl cursor-pointer hover:underline'>
+						Create an account
+					</Link>
 				</div>
 			</div>
 		</form>

@@ -2,12 +2,15 @@
 
 import React, { useEffect } from 'react'
 import ArchiveArticle from './ArchiveArticle'
+import { SafeNote } from '../types'
 
-import useArticles from '../hooks/useArticles'
 
-type Props = {}
 
-export default function ArchiveArticles({}: Props) {
+type Props = {
+		myArticles: SafeNote[] | undefined | null
+}
+
+export default function ArchiveArticles({myArticles}: Props) {
 	const imageSrcs = [
 		'/images/a3.webp',
 		'/images/a4.webp',
@@ -15,8 +18,7 @@ export default function ArchiveArticles({}: Props) {
 		'/images/a6.jpg'
 	]
 
-	const articlesHook = useArticles()
-	const myarticles = articlesHook.articles
+
 
 	useEffect(() => {
 		fetch('/api/mynotes', { cache: 'no-store' })
@@ -26,10 +28,12 @@ export default function ArchiveArticles({}: Props) {
 			})
 	}, [])
 
+	if(!myArticles || myArticles.length===0) return <div>No articule found.</div>
+
 	return (
 		<>
 			<div className='flex flex-col justify-start'>
-				{myarticles.map((archive, index) => (
+				{myArticles.map((archive, index) => (
 					<ArchiveArticle
 						key={index}
 						archive={archive}

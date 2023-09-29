@@ -13,28 +13,20 @@ import { Bars3Icon } from '@heroicons/react/24/outline'
 import headerNavLinks from '../data/headerNavLinks'
 import SearchButton from './SearchButton'
 import { BsBook } from 'react-icons/bs'
+import NavLink from './NavLink'
 
 const NavBar = () => {
 	const { data: session } = useSession()
 	const router = useRouter()
-	const { systemTheme, theme, setTheme } = useTheme()
 	const [mounted, setMounted] = useState(false)
-	const currentRoute = usePathname()
-	const [currentUser, setCurrentUser] = useState<string | null | undefined>(
-		null
-	)
-
-
+	const navLinkClassName =
+		'hidden sm:block font-medium rounded-lg px-4 py-2 text-gray-900 dark:text-gray-100 hover:bg-gray-200 dark:hover:bg-gray-700 active:underline  active:decoration-blue-400'
 
 	const sidebarState = useSidebar()
 
 	useEffect(() => {
 		setMounted(true)
 	}, [])
-
-	useEffect(() => {
-		if (session?.user?.name) setCurrentUser(session?.user?.name)
-	}, [session])
 
 	if (!mounted) return null
 
@@ -45,7 +37,9 @@ const NavBar = () => {
 					<div className='flex flex-row'>
 						<Link href='/' className='flex space-x-2'>
 							<BsBook className='w-6 h-6 text-rose-600 dark:text-rose-100  mr-4'></BsBook>
-							<span className='hidden md:inline-block font-sans font-bold text-lg text-rose-400'>Home</span>
+							<span className='hidden md:inline-block font-sans font-bold text-lg text-rose-400'>
+								Home
+							</span>
 						</Link>
 						<Bars3Icon
 							className='w-6 h-6 text-gray-500 dark:text-gray-100 lg:hidden'
@@ -59,24 +53,23 @@ const NavBar = () => {
 						{headerNavLinks
 							.filter((link) => link.href !== '/')
 							.map((link) => (
-								<Link
+								<NavLink
 									key={link.title}
 									href={link.href}
-									className='hidden sm:block font-medium text-gray-900 dark:text-gray-100 hover:underline-4 hover:underline-offset-4 hover:underline-blue-400'>
+									exact={false}
+									className={navLinkClassName}>
 									{link.title}
-								</Link>
+								</NavLink>
 							))}
 						{!session?.user ? (
-							<Link
-								href='/login'
-								className='hidden sm:block font-medium text-gray-900 dark:text-gray-100'>
+							<NavLink href='/login' exact={false} className={navLinkClassName}>
 								Login
-							</Link>
+							</NavLink>
 						) : (
 							<a
 								onClick={() => signOut()}
 								href='#'
-								className='hidden sm:block font-medium text-gray-900 dark:text-gray-100'>
+								className={navLinkClassName}>
 								Log out
 							</a>
 						)}
